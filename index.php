@@ -104,7 +104,6 @@ $result=$sqllogin->fetch(PDO::FETCH_ASSOC);
             $_SESSION['email']=$email;
             $_SESSION['senha']=$senha;
             $_SESSION['usuario']=$result['usuario'];
-
             header('Location: home.php');
         }else{
             echo "<script>alert('Senha Incorreta!')</script>";

@@ -10,7 +10,6 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
     header('location: index.php');
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,14 +21,19 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Color Utilities</title>
+    <title>Projeto Studio</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
+    
+    <!-- Jquery mascaras celular e telefone -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
@@ -64,8 +68,8 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 
             <!-- Heading -->
             <!--<div class="sidebar-heading">
-    Interface
-</div>-->
+                Interface
+            </div>-->
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -76,8 +80,8 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.php">Cadastrar</a>
-                        <a class="collapse-item" href="cards.php">Listar</a>
+                        <a class="collapse-item" href="cadastrarclientes.php">Cadastrar</a>
+                        <a class="collapse-item" href="listarclientes.php">Listar</a>
                     </div>
                 </div>
             </li>
@@ -91,8 +95,8 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.php">Cadastrar</a>
-                        <a class="collapse-item" href="utilities-border.php">Listar</a>
+                        <a class="collapse-item" href="cadastrarfuncionario.php">Cadastrar</a>
+                        <a class="collapse-item" href="listarfuncionarios.php">Listar</a>
                     </div>
                 </div>
             </li>
@@ -123,7 +127,7 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.php">
+                <a class="nav-link" href="historico.php">
                     <i class="fas fa-clipboard-list"></i>
                     <span>Histórico</span></a>
             </li>
@@ -152,7 +156,7 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
+                    <!-- Topbar Search
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
@@ -162,7 +166,7 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -236,15 +240,15 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                             </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        <!-- Nav Item - Messages-->
+                        <!--<li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
+                                <i class="fas fa-envelope fa-fw"></i>-->
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
+                                <!-- <span class="badge badge-danger badge-counter">7</span>
+                            </a> -->
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                            <!-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
                                     Message Center
                                 </h6>
@@ -294,14 +298,14 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
-                        </li>
+                        </li> -->
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['usuario']; ?></span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -335,114 +339,135 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-1 text-gray-800">Color Utilities</h1>
-                    <p class="mb-4">Bootstrap's default utility classes can be found on the official <a href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities
-                        below were created to extend this theme past the default utility classes built into Bootstrap's
-                        framework.</p>
+                    <h1 class="h3 mb-4 text-gray-800">Cadastrar Clientes</h1>
 
-                    <!-- Content Row -->
                     <div class="row">
 
-                        <!-- First Column -->
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
 
-                            <!-- Custom Text Color Utilities -->
+                            <!-- Circle Buttons -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Custom Text Color Utilities</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Insira os dados do cliente</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-gray-100 p-3 bg-dark m-0">.text-gray-100</p>
-                                    <p class="text-gray-200 p-3 bg-dark m-0">.text-gray-200</p>
-                                    <p class="text-gray-300 p-3 bg-dark m-0">.text-gray-300</p>
-                                    <p class="text-gray-400 p-3 bg-dark m-0">.text-gray-400</p>
-                                    <p class="text-gray-500 p-3 m-0">.text-gray-500</p>
-                                    <p class="text-gray-600 p-3 m-0">.text-gray-600</p>
-                                    <p class="text-gray-700 p-3 m-0">.text-gray-700</p>
-                                    <p class="text-gray-800 p-3 m-0">.text-gray-800</p>
-                                    <p class="text-gray-900 p-3 m-0">.text-gray-900</p>
+                                <form method="post">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Nome</label>
+                                        <input type="text" name="nome" class="form-control" id="nome" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                        <label for="inputPassword4">Sobrenome</label>
+                                        <input type="text" name="sobrenome" class="form-control" id="sobrenome" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label for="inputEmail4">Email</label>
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                        <label for="cpf">CPF</label>
+                                        <input type="text" name="cpf" class="form-control" id="cpf" placeholder="" >
+                                        <script>$('#cpf').mask('000.000.000-00', {reverse: true});</script>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                        <label for="txttelefone">Celular</label>
+                                        <input type="text" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" />
+                                        <script type="text/javascript">$("#celular").mask("(00) 0 0000-0000");</script>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                        <label for="txttelefone">Telefone</label>
+                                        <input type="text" name="telefone" placeholder="(00) 00000-0000" class="form-control" id="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}" />
+                                        <script type="text/javascript">$("#telefone").mask("(00) 0000-0000");</script>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                        <label for="inputPassword4">Data de Nascimento</label>
+                                        <input type="date" name="datanascimento" class="form-control" id="datanascimento">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-10">
+                                        <label for="txttelefone">Endereço</label>
+                                        <input type="text" name="endereco" placeholder="Av/Rua nome da rua" class="form-control" id="endereco"/>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                        <label for="txttelefone">Número</label>
+                                        <input type="text" name="numero" class="form-control" id="numero"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                        <label for="inputCity">Cidade</label>
+                                        <input type="text" name="cidade" class="form-control" id="cidade">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                        <label for="inputState" name="uf" >UF</label>
+                                        <select type = "text" id="uf" name ="uf" class="form-control">
+                                            <option selected>Choose...</option>
+                                            <option>PR</option>
+                                        </select>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                        <label for="inputZip">CEP</label>
+                                        <input type="text" name="cep" class="form-control" id="cep" pattern="\[0-8]{5}-[0-8]{3}>">
+                                        <script type="text/javascript">$("#cep").mask("00000-000");</script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="informacoesadicionais">Informacões Adicionais</label>
+                                        <input type="text" name="informacoesadicionais" class="form-control" id="informacoesadicionais" placeholder="Ex: Doenças, uso de medicamentos, alergias , etc.">
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="receberoferta" id="receberoferta">
+                                        <label class="form-check-label" for="gridCheck">
+                                            Receber ofertas por E-mail
+                                        </label>
+                                        </div>
+                                    </div> -->
+                                    <button type="submit" name="cadastrarcliente" id="cadastrarcliente" class="btn btn-primary">Cadastrar</button>
+
+                                    </form>
                                 </div>
                             </div>
 
-                            <!-- Custom Font Size Utilities -->
+
+                            <!-- Brand Buttons ///////// OUTRA DIV QUE PODE USAR-->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Custom Font Size Utilities</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Brand Buttons</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-xs">.text-xs</p>
-                                    <p class="text-lg mb-0">.text-lg</p>
                                 </div>
-                            </div>
-
-                        </div>
-
-                        <!-- Second Column -->
-                        <div class="col-lg-4">
-
-                            <!-- Background Gradient Utilities -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Custom Background Gradient Utilities
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="px-3 py-5 bg-gradient-primary text-white">.bg-gradient-primary</div>
-                                    <div class="px-3 py-5 bg-gradient-secondary text-white">.bg-gradient-secondary</div>
-                                    <div class="px-3 py-5 bg-gradient-success text-white">.bg-gradient-success</div>
-                                    <div class="px-3 py-5 bg-gradient-info text-white">.bg-gradient-info</div>
-                                    <div class="px-3 py-5 bg-gradient-warning text-white">.bg-gradient-warning</div>
-                                    <div class="px-3 py-5 bg-gradient-danger text-white">.bg-gradient-danger</div>
-                                    <div class="px-3 py-5 bg-gradient-light text-white">.bg-gradient-light</div>
-                                    <div class="px-3 py-5 bg-gradient-dark text-white">.bg-gradient-dark</div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!-- Third Column -->
-                        <div class="col-lg-4">
-
-                            <!-- Grayscale Utilities -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Custom Grayscale Background Utilities
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="p-3 bg-gray-100">.bg-gray-100</div>
-                                    <div class="p-3 bg-gray-200">.bg-gray-200</div>
-                                    <div class="p-3 bg-gray-300">.bg-gray-300</div>
-                                    <div class="p-3 bg-gray-400">.bg-gray-400</div>
-                                    <div class="p-3 bg-gray-500 text-white">.bg-gray-500</div>
-                                    <div class="p-3 bg-gray-600 text-white">.bg-gray-600</div>
-                                    <div class="p-3 bg-gray-700 text-white">.bg-gray-700</div>
-                                    <div class="p-3 bg-gray-800 text-white">.bg-gray-800</div>
-                                    <div class="p-3 bg-gray-900 text-white">.bg-gray-900</div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
 
                 </div>
-                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
@@ -454,22 +479,35 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pronto para sair ?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Clique em "Sair" se deseja encerrar sua sessão.</div>
+                    <div class="modal-footer">
+                        <form method="POST">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-primary" name="logout">Sair</button>
+                        </form>
+
+                        <!-- ENCERRA SESSAO E VOLTA AO INICIO -->
+                        <?php
+                        if (isset($_POST['logout'])){
+                            
+                            session_destroy();
+                            echo "<script>location.href='index.php';</script>";
+                        }
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -484,3 +522,47 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 </body>
 
 </html>
+
+
+                            <!-- CADASTRA CLIENTE -->
+
+<?php
+
+include 'connect.php';
+
+if(isset($_POST['cadastrarcliente'])){
+    $nome=$_POST['nome'];
+    $sobrenome=$_POST['sobrenome'];
+    $email=$_POST['email'];
+    $cpf=$_POST['cpf'];
+    $celular=$_POST['celular'];
+    $telefone=$_POST['telefone'];
+    $datanascimento=$_POST['datanascimento'];
+    $endereco=$_POST['endereco'];
+    $numero=$_POST['numero'];
+    $cidade=$_POST['cidade'];
+    $uf=$_POST['uf'];
+    $cep=$_POST['cep'];
+    $informacoesadicionais=$_POST['informacoesadicionais'];
+
+    
+
+    //$sqlinsertcliente="INSERT INTO cliente VALUES(null,'$nome','$sobrenome','$email','$cpf','$celular','$telefone',$datanascimento,'$endereco','$numero','$cidade','$uf','$cep','$informacoesadicionais',current_timestamp())";
+    $sqlinsertcliente="INSERT INTO cliente VALUES(null,?,?,?,?,?,?,?,?,?,?,?,?,?,current_timestamp())";
+
+    $sqlinsert=$pdo->prepare($sqlinsertcliente);
+    $sqlinsert->execute(array($nome,$sobrenome,$email,$cpf,$celular,$telefone,$datanascimento,$endereco,$numero,$cidade,$uf,$cep,$informacoesadicionais));
+    //$sqlinsert->execute();
+    
+    if($sqlinsert){
+
+        echo '<script type="text/javascript">
+        swal("", "Cliente cadastrado com sucesso!", "success");
+        </script>';
+    }else{
+        echo '<script type="text/javascript">
+        swal("", "Erro ao cadastrar cliente!", "error");
+        </script>';
+    }
+}
+?>

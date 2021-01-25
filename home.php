@@ -1,21 +1,14 @@
 <?php
-session_start();
+    session_start();
 
-if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
+    if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['login']);
     unset($_SESSION['senha']);
     unset($_SESSION['usuario']);
     echo "<script>alert('Faça login para acessar a página!')</script>";
 
     header('location: index.php');
-}
-
-?>
-
-
-<!DOCTYPE html>
-
-<head>
+    }?>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,7 +48,7 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="home.php"
+                <a class="nav-link" href="home.php">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Agenda</span></a>
             </li>
@@ -77,8 +70,8 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.php">Cadastrar</a>
-                        <a class="collapse-item" href="cards.php">Listar</a>
+                        <a class="collapse-item" href="cadastrarclientes.php">Cadastrar</a>
+                        <a class="collapse-item" href="listarclientes.php">Listar</a>
                     </div>
                 </div>
             </li>
@@ -92,8 +85,8 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.php">Cadastrar</a>
-                        <a class="collapse-item" href="utilities-border.php">Listar</a>
+                        <a class="collapse-item" href="cadastrarfuncionario.php">Cadastrar</a>
+                        <a class="collapse-item" href="listarfuncionarios.php">Listar</a>
                     </div>
                 </div>
             </li>
@@ -124,7 +117,7 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.php">
+                <a class="nav-link" href="historico.php">
                     <i class="fas fa-clipboard-list"></i>
                     <span>Histórico</span></a>
             </li>
@@ -370,7 +363,9 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <div id="calendar"></div>
+                                        <?php
+                                            print_r($_SESSION);
+                                        ?>
 
                                     </div>
                                 </div>
@@ -454,12 +449,16 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                 <div class="modal-footer">
                     <form method="POST">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-primary" name="logout">Sair</button>
+                        <button class="btn btn-primary" type = "submit" name="logout">Sair</button>
                     </form>
                     <?php
-                    if (isset($_POST['logout']))
+                    if (isset($_POST['logout'])){
+
                         session_destroy();
-                        header('location:index.php');
+                        echo "<script>location.href='index.php';</script>";
+                    
+                    }
+
                     ?>
                 </div>
             </div>
