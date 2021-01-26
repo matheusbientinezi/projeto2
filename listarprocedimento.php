@@ -26,125 +26,71 @@
 
 <body id="page-top">
 
-<?php
-include 'navbar.php';
-?>
+    <?php
+    include 'navbar.php';
+    ?>
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-                    <!-- Page Heading
-                    <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Lista de Clientes</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Procedimento</th>
-                                            <th>Tempo</th>
-                                            <th>Informações</th>
-                                            <th>Visualizar</th>
-                                            <th>Excluir</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            <?php
-                                            
-                                            include 'connect.php';
-
-                                            $sqlselect="SELECT id,procedimento,tempo,informacoesadicionais FROM procedimento";
-                                            
-                                            $selectprocedimento = $pdo->prepare($sqlselect);
-                                            $selectprocedimento->execute();
-
-                                            $result=$selectprocedimento->fetchAll(PDO::FETCH_ASSOC);
-
-                                            foreach($result as $procedimento){
-                                                echo '<tr>';
-                                                echo '<td>'.$procedimento['id'].'</td>';
-                                                echo '<td>'.$procedimento['procedimento'].'</td>';
-                                                echo '<td>'.$procedimento['tempo'].'</td>';
-                                                echo '<td>'.$procedimento['informacoesadicionais'].'</td>';
-                                                echo '<td><button type="button" class="btn btn-info">Editar</button></td>';
-                                                echo "<td><button id='excluir' onclick='excluiProcedimento({$procedimento['id']});' type='button' class='btn btn-danger'>Excluir</button></td>";
-                                                echo '</tr>';
-                                            }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Lista de Clientes</h6>
             </div>
-            <!-- End of Main Content -->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Procedimento</th>
+                                <th>Tempo</th>
+                                <th>Informações</th>
+                                <th>Visualizar</th>
+                                <th>Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
 
-            
-            <script>
-                function excluiProcedimento(id) {
+                            include 'connect.php';
 
-                 var resposta = confirm("Deseja remover esse registro?");
+                            $sqlselect = "SELECT id,procedimento,tempo,informacoesadicionais FROM procedimento";
 
-                 if (resposta == true) {
-                window.location.href = "delete.php?id=" + id;
-                 } else {
-                window.location.href = "select.php";
-                 }
-              }
-         </script>
+                            $selectprocedimento = $pdo->prepare($sqlselect);
+                            $selectprocedimento->execute();
 
-            <!-- <script>
-            function excluiProcedimento(){
+                            $result = $selectprocedimento->fetchAll(PDO::FETCH_ASSOC);
 
-                swal ( {
-                    título : " Tem certeza? " , 
-                    text : " Uma vez excluído, você não será capaz de recuperar este arquivo imaginário! " , 
-                    ícone : " aviso " , 
-                    botões : verdadeiro , 
-                    perigoMode : verdadeiro , 
-                    } )
-                    . então ( ( willDelete ) =>  { 
-                    if ( willDelete ) {  
-                        swal ( " Poof! Seu arquivo imaginário foi excluído! " , { 
-                        ícone : " sucesso " , 
-                        //  < ?php include 'connect.php'; $delete = $pdo->prepare("DELETE FROM procedimento WHERE id=".$procedimento['id'].""); $delete->execute();?>,
-                        } ) ;
-                    } else {  
-                        swal ( " Seu arquivo imaginário está seguro! " ) ;
-                    }
-                    } ) ;
-            }
-            
-            </script> -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
+                            foreach ($result as $procedimento) {
+                                echo '<tr>';
+                                echo '<td>' . $procedimento['id'] . '</td>';
+                                echo '<td>' . $procedimento['procedimento'] . '</td>';
+                                echo '<td>' . $procedimento['tempo'] . '</td>';
+                                echo '<td>' . $procedimento['informacoesadicionais'] . '</td>';
+                                echo '<td><button type="button" class="btn btn-info">Editar</button></td>';
+                                echo "<td><button id='excluir' type='button' class='btn btn-danger' onclick='excluirRegistro({$procedimento['id']})'>Excluir</button></form></td>";
+                                echo '</tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-            </footer>
-            <!-- End of Footer -->
-
+            </div>
         </div>
-        <!-- End of Content Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+    </div> <!-- /.container-fluid -->
+   
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2020</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -153,32 +99,32 @@ include 'navbar.php';
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Pronto para sair ?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Clique em "Sair" se deseja encerrar sua sessão.</div>
-                    <div class="modal-footer">
-                        <form method="POST">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-primary" name="logout">Sair</button>
-                        </form>
-                        <!-- ENCERRA SESSAO E VOLTA AO INICIO -->
-                        <?php
-                        if (isset($_POST['logout'])){
-                            
-                            session_destroy();
-                            echo "<script>location.href='index.php';</script>";
-                        }
-                        ?>
-                    </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pronto para sair ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Clique em "Sair" se deseja encerrar sua sessão.</div>
+                <div class="modal-footer">
+                    <form method="POST">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-primary" name="logout">Sair</button>
+                    </form>
+                    <!-- ENCERRA SESSAO E VOLTA AO INICIO -->
+                    <?php
+                    if (isset($_POST['logout'])) {
+
+                        session_destroy();
+                        echo "<script>location.href='index.php';</script>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -200,3 +146,41 @@ include 'navbar.php';
 </body>
 
 </html>
+
+<script>
+        function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds){
+            break;
+    }
+  };
+}
+
+</script>
+
+
+<script>
+    function excluirRegistro(id){
+
+        swal({
+                    title: "Tem certeza ?",
+                    text: "Uma vez deletado, terá que recadastrar o procedimento!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Procedimento excluido com sucesso!", {
+                            icon: "success",
+                            buttons:false,
+                        });
+                        window.location.href = "delete.php?id=" + id;
+                    } else {
+                        swal("Exclusão de procedimento cancelada!");
+                    }
+                });
+        }
+
+</script>
