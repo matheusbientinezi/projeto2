@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +20,7 @@
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
@@ -33,48 +33,53 @@ include 'navbar.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                    <!-- Page Heading
+                    <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
                     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+                        For more information about DataTables, please visit the <a target="_blank"
+                            href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Lista de Clientes</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>ID</th>
+                                            <th>Procedimento</th>
+                                            <th>Tempo</th>
+                                            <th>Informações</th>
+                                            <th>Visualizar</th>
+                                            <th>Excluir</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                            <?php
+                                            
+                                            include 'connect.php';
+
+                                            $sqlselect="SELECT id,procedimento,tempo,informacoesadicionais FROM procedimento";
+                                            
+                                            $selectprocedimento = $pdo->prepare($sqlselect);
+                                            $selectprocedimento->execute();
+
+                                            $result=$selectprocedimento->fetchAll(PDO::FETCH_ASSOC);
+
+                                            foreach($result as $procedimento){
+                                                echo '<tr>';
+                                                echo '<td>'.$procedimento['id'].'</td>';
+                                                echo '<td>'.$procedimento['procedimento'].'</td>';
+                                                echo '<td>'.$procedimento['tempo'].'</td>';
+                                                echo '<td>'.$procedimento['informacoesadicionais'].'</td>';
+                                                echo '<td><button type="button" class="btn btn-info">Editar</button></td>';
+                                                echo "<td><button id='excluir' onclick='excluiProcedimento({$procedimento['id']});' type='button' class='btn btn-danger'>Excluir</button></td>";
+                                                echo '</tr>';
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -86,6 +91,44 @@ include 'navbar.php';
 
             </div>
             <!-- End of Main Content -->
+
+            
+            <script>
+                function excluiProcedimento(id) {
+
+                 var resposta = confirm("Deseja remover esse registro?");
+
+                 if (resposta == true) {
+                window.location.href = "delete.php?id=" + id;
+                 } else {
+                window.location.href = "select.php";
+                 }
+              }
+         </script>
+
+            <!-- <script>
+            function excluiProcedimento(){
+
+                swal ( {
+                    título : " Tem certeza? " , 
+                    text : " Uma vez excluído, você não será capaz de recuperar este arquivo imaginário! " , 
+                    ícone : " aviso " , 
+                    botões : verdadeiro , 
+                    perigoMode : verdadeiro , 
+                    } )
+                    . então ( ( willDelete ) =>  { 
+                    if ( willDelete ) {  
+                        swal ( " Poof! Seu arquivo imaginário foi excluído! " , { 
+                        ícone : " sucesso " , 
+                        //  < ?php include 'connect.php'; $delete = $pdo->prepare("DELETE FROM procedimento WHERE id=".$procedimento['id'].""); $delete->execute();?>,
+                        } ) ;
+                    } else {  
+                        swal ( " Seu arquivo imaginário está seguro! " ) ;
+                    }
+                    } ) ;
+            }
+            
+            </script> -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">

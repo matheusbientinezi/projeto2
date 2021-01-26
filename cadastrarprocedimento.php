@@ -45,80 +45,31 @@ include 'navbar.php';
                             <!-- Circle Buttons -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Insira os dados do cliente</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Insira os dados do procedimento</h6>
                                 </div>
                                 <div class="card-body">
                                 <form method="post">
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Nome</label>
-                                        <input type="text" name="nome" class="form-control" id="nome" required>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Sobrenome</label>
-                                        <input type="text" name="sobrenome" class="form-control" id="sobrenome" required>
+                                        <label for="procedimento">Procedimento</label>
+                                        <input type="text" name="procedimento" class="form-control" id="procedimento" required>
                                         </div>
                                     </div>
                                     
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Email</label>
-                                        <input type="email" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                        <label for="cpf">CPF</label>
-                                        <input type="text" name="cpf" class="form-control" id="cpf" placeholder="" >
-                                        <script>$('#cpf').mask('000.000.000-00', {reverse: true});</script>
+                                        <label for="inputEmail4">Tempo</label>
+                                        <input type="time" name="tempo" class="form-control" id="tempo" required>
                                         </div>
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                        <label for="txttelefone">Celular</label>
-                                        <input type="text" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" />
-                                        <script type="text/javascript">$("#celular").mask("(00) 0 0000-0000");</script>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                        <label for="txttelefone">Telefone</label>
-                                        <input type="text" name="telefone" placeholder="(00) 00000-0000" class="form-control" id="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}" />
-                                        <script type="text/javascript">$("#telefone").mask("(00) 0000-0000");</script>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Data de Nascimento</label>
-                                        <input type="date" name="datanascimento" class="form-control" id="datanascimento">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-10">
-                                        <label for="txttelefone">Endereço</label>
-                                        <input type="text" name="endereco" placeholder="Av/Rua nome da rua" class="form-control" id="endereco"/>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                        <label for="txttelefone">Número</label>
-                                        <input type="text" name="numero" class="form-control" id="numero"/>
-                                        </div>
-                                    </div>
+                                
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                        <label for="inputCity">Cidade</label>
-                                        <input type="text" name="cidade" class="form-control" id="cidade">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                        <label for="inputState" name="uf" >UF</label>
-                                        <select type = "text" id="uf" name ="uf" class="form-control">
-                                            <option selected>Choose...</option>
-                                            <option>PR</option>
-                                        </select>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                        <label for="inputZip">CEP</label>
-                                        <input type="text" name="cep" class="form-control" id="cep" pattern="\[0-8]{5}-[0-8]{3}>">
-                                        <script type="text/javascript">$("#cep").mask("00000-000");</script>
+                                        <label for="inputEmail4">Informações Adicionais</label>
+                                        <input type="text" name="informacoesadicionais" class="form-control" id="informacoesadicionais">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="informacoesadicionais">Informacões Adicionais</label>
-                                        <input type="text" name="informacoesadicionais" class="form-control" id="informacoesadicionais" placeholder="Ex: Doenças, uso de medicamentos, alergias , etc.">
-                                    </div>
+
                                     <!-- <div class="form-group">
                                         <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="receberoferta" id="receberoferta">
@@ -127,7 +78,7 @@ include 'navbar.php';
                                         </label>
                                         </div>
                                     </div> -->
-                                    <button type="submit" name="cadastrarcliente" id="cadastrarcliente" class="btn btn-primary">Cadastrar</button>
+                                    <button type="submit" name="cadastrarprocedimento" id="cadastrarprocedimento" class="btn btn-primary">Cadastrar</button>
 
                                     </form>
                                 </div>
@@ -221,44 +172,34 @@ include 'navbar.php';
 </html>
 
 
-                            <!-- CADASTRA CLIENTE -->
+                            <!-- CADASTRA PROCEDIMENTO -->
 
 <?php
 
 include 'connect.php';
 
-if(isset($_POST['cadastrarcliente'])){
-    $nome=$_POST['nome'];
-    $sobrenome=$_POST['sobrenome'];
-    $email=$_POST['email'];
-    $cpf=$_POST['cpf'];
-    $celular=$_POST['celular'];
-    $telefone=$_POST['telefone'];
-    $datanascimento=$_POST['datanascimento'];
-    $endereco=$_POST['endereco'];
-    $numero=$_POST['numero'];
-    $cidade=$_POST['cidade'];
-    $uf=$_POST['uf'];
-    $cep=$_POST['cep'];
+if(isset($_POST['cadastrarprocedimento'])){
+    $procedimento=$_POST['procedimento'];
+    $tempo=$_POST['tempo'];
     $informacoesadicionais=$_POST['informacoesadicionais'];
 
     
 
     //$sqlinsertcliente="INSERT INTO cliente VALUES(null,'$nome','$sobrenome','$email','$cpf','$celular','$telefone',$datanascimento,'$endereco','$numero','$cidade','$uf','$cep','$informacoesadicionais',current_timestamp())";
-    $sqlinsertcliente="INSERT INTO cliente VALUES(null,?,?,?,?,?,?,?,?,?,?,?,?,?,current_timestamp())";
+    $sqlinsertprocedimento="INSERT INTO procedimento VALUES(null,?,?,?)";
 
-    $sqlinsert=$pdo->prepare($sqlinsertcliente);
-    $sqlinsert->execute(array($nome,$sobrenome,$email,$cpf,$celular,$telefone,$datanascimento,$endereco,$numero,$cidade,$uf,$cep,$informacoesadicionais));
+    $sqlinsert=$pdo->prepare($sqlinsertprocedimento);
+    $sqlinsert->execute(array($procedimento,$tempo,$informacoesadicionais));
     //$sqlinsert->execute();
     
     if($sqlinsert){
 
         echo '<script type="text/javascript">
-        swal("", "Cliente cadastrado com sucesso!", "success");
+        swal("", "Procedimento cadastrado com sucesso!", "success");
         </script>';
     }else{
         echo '<script type="text/javascript">
-        swal("", "Erro ao cadastrar cliente!", "error");
+        swal("", "Erro ao cadastrar Procedimento!", "error");
         </script>';
     }
 }

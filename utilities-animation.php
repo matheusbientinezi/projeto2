@@ -1,18 +1,3 @@
-<?php
-session_start();
-
-if((!isset ($_SESSION['email']) == true) and (!isset ($_SESSION['senha']) == true))
-{
-  unset($_SESSION['login']);
-  unset($_SESSION['senha']);
-  unset($_SESSION['usuario']);
-  echo "<script>alert('Faça login para acessar a página!')</script>";
- 
-  header('location: index.php');
-
-  }
-  ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
