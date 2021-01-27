@@ -61,7 +61,7 @@ include 'navbar.php'
                                 <div class="card-body">
                                     <div class="chart-area">
                                         <?php
-                                            print_r($_SESSION);
+                                        
                                         ?>
 
                                     </div>
@@ -91,6 +91,7 @@ include 'navbar.php'
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
+                                        <?php print_r($_SESSION) ?>
                                     </div>
                                 </div>
                             </div>

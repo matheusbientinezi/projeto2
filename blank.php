@@ -380,12 +380,12 @@
                             <!-- Card Body -->
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <form method="POST" enctype="multipart/form-data">
-                                        <label for="imagem">Imagem:</label>
-                                        <input type="file" name="imagem"/>
-                                        <br/>
-                                        <input type="submit" value="Enviar"/>
-                                    </form>
+                                <form enctype="multipart/form-data" action="upload.php" method="post">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/>
+                                    <div><input name="imagem" type="file"/></div>
+                                    <div><input name = "salvar" type="submit" value="Salvar"/></div>
+                                    <img scr="<?php echo $result['foto_perfil']?>">
+                                </form>
                                 </div>
                             </div>
                         </div>
@@ -451,3 +451,20 @@
 </body>
 
 </html>
+
+<?php
+include 'connect.php';
+
+if(isset($_POST['salvar'])){
+    
+    $imagem=$_FILE['foto_perfil'];
+    $sql="INSERT INTO usuario_adm (foto_perfil) WHERE usuario = 'Dellas ADM' VALUES ('".$imagem."')";
+
+    $sqlinsertimagem = $pdo ->prepare($sql);
+    $sqlinsertimagem->execute();
+
+
+
+}
+
+?>

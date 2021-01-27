@@ -92,7 +92,7 @@ $email = $_POST['email'];
 $senha = $_POST['senha'];
 
 //executa select no banco com os dados
-$querylogin="SELECT email,senha,usuario FROM usuario_adm WHERE email = '".$email."'";
+$querylogin="SELECT usuario,email,senha,foto_perfil FROM usuario_adm WHERE email = '".$email."'";
 $sqllogin = $pdo -> prepare($querylogin);
 $sqllogin->execute();
 $result=$sqllogin->fetch(PDO::FETCH_ASSOC);
@@ -101,15 +101,17 @@ $result=$sqllogin->fetch(PDO::FETCH_ASSOC);
     if(!empty($result['email'])){
         if($result['senha']===$senha){
             session_start();
-            $_SESSION['email']=$email;
-            $_SESSION['senha']=$senha;
+            $_SESSION['email']=$result['email'];
+            $_SESSION['senha']=$result['senha'];
             $_SESSION['usuario']=$result['usuario'];
+            $_SESSION['foto_perfil']=$result['foto_perfil'];
             header('Location: home.php');
         }else{
             echo "<script>alert('Senha Incorreta!')</script>";
             unset ($_SESSION['email']);
             unset ($_SESSION['senha']);
             unset ($_SESSION['usuario']);
+            unset ($_SESSION['foto_perfil']);
         }
 
     }else{ 
