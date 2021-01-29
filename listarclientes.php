@@ -24,25 +24,28 @@
 </head>
 
 <body id="page-top">
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- INCLUE NAVBAR COM SESSAO -->
 <?php
 include 'navbar.php';
 ?>
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading
-                    <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                    <!-- CAMPOS QUE PODEM SER UTILIZADOS ABAIXO DO TITULO DA PAGINA-->
+                    <!--<h1 class="h3 mb-2 text-gray-800">Clientes</h1>
                     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                         For more information about DataTables, please visit the <a target="_blank"
                             href="https://datatables.net">official DataTables documentation</a>.</p> -->
-
-                    <!-- DataTales Example -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                    <!--TITULO DA PAGINA DE LISTA DE CLIENTES -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Lista de Clientes</h6>
                         </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                    <!-- INICIO DA TABELA DE CLIENTES -->
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -52,13 +55,14 @@ include 'navbar.php';
                                             <th>Nome</th>
                                             <th>Sobrenome</th>
                                             <th>Celular</th>
-                                            <th>Visualizar</th>
-                                            <th>Excluir</th>
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+                                    <!-- BUSCA OS DADOS NO BANCO PARA LISTAR -->
                                             <?php
-                                            
                                             include 'connect.php';
 
                                             $sqlselect="SELECT id,nome,sobrenome,celular FROM cliente";
@@ -74,23 +78,23 @@ include 'navbar.php';
                                                 echo '<td>'.$cliente['nome'].'</td>';
                                                 echo '<td>'.$cliente['sobrenome'].'</td>';
                                                 echo '<td>'.$cliente['celular'].'</td>';
-                                                echo '<td><button type="button" class="btn btn-info">Visualizar</button></td>';
-                                                echo '<td><button type="button" class="btn btn-danger">Excluir</button></td>';
+                                                echo '<td><a type="button" href="perfilcliente.php" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                                          <a type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>';
                                                 echo '</tr>';
                                             }
                                         ?>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <!-- /.container-fluid -->
-
+                <!-- ENCERRA DIV DE LISTA DE CLIENTES -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- FECHA DIVS ANTERIORES -->
             </div>
-            <!-- End of Main Content -->
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -100,19 +104,15 @@ include 'navbar.php';
                 </div>
             </footer>
             <!-- End of Footer -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
+    <!-- BOTAO QUE VOLTA AO TOPO DA PAGINA -->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- MODAL DE LOGOUT E ENCERRA SESSAO-->
 
-    <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -140,7 +140,7 @@ include 'navbar.php';
                 </div>
             </div>
         </div>
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -161,3 +161,14 @@ include 'navbar.php';
 </body>
 
 </html>
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- REDIRECIONA PARA PERFIL DO CLIENTE -->
+<?php
+
+
+
+
+?>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->

@@ -16,102 +16,125 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="scss/calendario.scss" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ADICIONA NAVBAR COM SESSAO -->
 
 <?php
 include 'navbar.php'
 ?>
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <!-- INICIO DA PÁGINA -->
+        <div class="container-fluid">
 
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- TITULO DA PAGINA COM BOTAO À ESQUERDA-->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                <!-- BOTAO À ESQUERDA -->
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- Content Row -->
+            <div class="row">
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                <!-- AREA PRINCIPIAL DO CALENDARIO-->
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                        <!-- TITULO DA DIV DO CALENDARIO -->
 
-                    <!-- Content Row -->
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">AGENDA 1</h6>
+                            <div class="dropdown no-arrow">
+                        
+                        <!-- TRES BOLINHAS COM DROPDOWN NO CANTO -->
+                                <!-- <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-header">Dropdown Header:</div>
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div> -->
 
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-12 col-lg-2">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <?php
-                                        
-                                        ?>
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                        <!-- CALENDARIO -->
+                        <div class="card-body">
+                            <div class="chart-area">
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                            <script src="http://momentjs.com/downloads/moment.js"></script>
+                            <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css' />
+                            <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.js'></script>
 
-                        <!-- Pie Chart -->
-                        <div class="col-xl-12 col-lg-2">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <?php print_r($_SESSION) ?>
-                                    </div>
-                                </div>
+
+                            <div id='calendar'>
+                            <script>
+
+                            $(document).ready(function() {
+
+                            // page is now ready, initialize the calendar...
+
+                            $('#calendar').fullCalendar({
+                                // put your options and callbacks here
+                            })
+
+                            });
+
+                            </script>
+                            </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
                 </div>
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                <!-- AREA PRINCIPIAL DO CALENDARIO-->
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card shadow mb-4">
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                         <!-- TITULO DA DIV DO CALENDARIO --> 
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">AGENDA 2</h6>
+                            <div class="dropdown no-arrow">
+                        
+                        <!-- TRES BOLINHAS COM DROPDOWN NO CANTO -->
+                                <!-- <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                    <div class="dropdown-header">Dropdown Header:</div>
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div> -->
+                                
+                            </div>
+                        </div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                        <!-- CALENDARIO -->
+                        <div class="card-body">
+                            <div class="chart-area">
+                            <!-- AQUI VAI O SUPOSTO CALENDARIO DA PAGINA PRINCIPAL -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             </div>
         </div>
 
-    </div>
-    <!-- /.container-fluid -->
-
-    </div>
-    <!-- End of Main Content -->
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -121,19 +144,14 @@ include 'navbar.php'
         </div>
     </footer>
     <!-- End of Footer -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-    </div>
-    <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
+    <!-- QUADRADINHO QUE VOLTA AO INICIO DA PAGINA-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- MODAL AO CLICAR NO PERFIL PARA DESLOGAR -->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -149,20 +167,20 @@ include 'navbar.php'
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="btn btn-primary" type = "submit" name="logout">Sair</button>
                     </form>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->                    
+                    <!-- MATA A SESSAO AO DESLOGAR -->
                     <?php
                     if (isset($_POST['logout'])){
-
                         session_destroy();
                         echo "<script>location.href='index.php';</script>";
-                    
                     }
-
                     ?>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->                    
                 </div>
             </div>
         </div>
     </div>
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -175,6 +193,7 @@ include 'navbar.php'
 
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/calendario.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>

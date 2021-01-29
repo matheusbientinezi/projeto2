@@ -1,3 +1,6 @@
+<?php
+include 'navbar.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,70 +30,125 @@
 
 <body id="page-top">
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-    <!-- INCLUE NAVBAR COM SESSAO -->
-    <?php
-    include 'navbar.php';
-    ?>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-    <!--INICIO DA PAGINA DE CADASTRO DE PROCEDIMENTO-->
+    <!-- INICIO DA PAGINA -->
     <div class="container-fluid">
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-        <!--TITULO DA PAGINA DE CADASTRO DE PROCEDIMENTO-->
-        <h1 class="h3 mb-4 text-gray-800">Procedimento</h1>
+        <!--TITULO NA PARTE PRINCIPAL-->
+        <h1 class="h3 mb-4 text-gray-800">Cadastrar Clientes</h1>
 
         <div class="row">
             <div class="col-lg-12">
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-                <!-- INICIO DO FORMULARIO DE CADASTRO -->
+                <!-- INICIO DIV DE CADASTRO DE CLIENTE -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Insira os dados do procedimento</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Insira os dados do cliente</h6>
                     </div>
                     <div class="card-body">
                         <form method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="procedimento">Procedimento</label>
-                                    <input type="text" name="procedimento" class="form-control" id="procedimento" required>
+                                    <label for="inputEmail4">Nome</label>
+                                    <input type="text" name="nome" class="form-control" id="nome" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputPassword4">Sobrenome</label>
+                                    <input type="text" name="sobrenome" class="form-control" id="sobrenome" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Tempo</label>
-                                    <input type="time" name="tempo" class="form-control" id="tempo" required>
+                                    <label for="inputEmail4">Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="cpf">CPF</label>
+                                    <input type="text" name="cpf" class="form-control" id="cpf" placeholder="">
+                                    <script>
+                                        $('#cpf').mask('000.000.000-00', {
+                                            reverse: true
+                                        });
+                                    </script>
                                 </div>
                             </div>
-
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="txttelefone">Celular</label>
+                                    <input type="text" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" />
+                                    <script type="text/javascript">
+                                        $("#celular").mask("(00) 0 0000-0000");
+                                    </script>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="txttelefone">Telefone</label>
+                                    <input type="text" name="telefone" placeholder="(00) 00000-0000" class="form-control" id="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}" />
+                                    <script type="text/javascript">
+                                        $("#telefone").mask("(00) 0000-0000");
+                                    </script>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputPassword4">Data de Nascimento</label>
+                                    <input type="date" name="datanascimento" class="form-control" id="datanascimento">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-10">
+                                    <label for="txttelefone">Endereço</label>
+                                    <input type="text" name="endereco" placeholder="Av/Rua nome da rua" class="form-control" id="endereco" />
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="txttelefone">Número</label>
+                                    <input type="text" name="numero" class="form-control" id="numero" />
+                                </div>
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Informações Adicionais</label>
-                                    <input type="text" name="informacoesadicionais" class="form-control" id="informacoesadicionais">
+                                    <label for="inputCity">Cidade</label>
+                                    <input type="text" name="cidade" class="form-control" id="cidade">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputState" name="uf">UF</label>
+                                    <select type="text" id="uf" name="uf" class="form-control">
+                                        <option selected>Choose...</option>
+                                        <option>PR</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputZip">CEP</label>
+                                    <input type="text" name="cep" class="form-control" id="cep" pattern="\[0-8]{5}-[0-8]{3}>">
+                                    <script type="text/javascript">
+                                        $("#cep").mask("00000-000");
+                                    </script>
                                 </div>
                             </div>
-                            <button type="submit" name="cadastrarprocedimento" id="cadastrarprocedimento" class="btn btn-primary">Cadastrar</button>
+                            <div class="form-group">
+                                <label for="informacoesadicionais">Informacões Adicionais</label>
+                                <input type="text" name="informacoesadicionais" class="form-control" id="informacoesadicionais" placeholder="Ex: Doenças, uso de medicamentos, alergias , etc.">
+                            </div>
+                            <button type="submit" name="cadastrarcliente" id="cadastrarcliente" class="btn btn-primary">Cadastrar</button>
                         </form>
                     </div>
                 </div>
-
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
- 
-                <!-- OUTRA DIV QUE PODE USAR-->
+
+                <!-- SEGUNDA DIV QUE PODE USAR-->
                 <!-- <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Brand Buttons</h6>
                     </div>
                     <div class="card-body">
-
                     </div>
                 </div> -->
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-             <!-- FECHA DIVS ANTERIORES -->
+            
+            <!-- FECHA DIVS ANTERIORES -->
             </div>
+
         </div>
-    </div>   <!-- End of Main Content -->
- 
- <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    </div><!-- /.container-fluid -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->    
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -101,12 +159,12 @@
     </footer>
     <!-- End of Footer -->
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-    <!-- BOTAO QUE VAI PARA O TOPO DA PAGINA -->
+    <!-- BOTAO QUE SOBE AO INICIO DA PAGINA-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-    <!-- MODAL DE LOGOUT AO CLICAR NO PERFIL E ENCERRA SESSAO-->
+    <!-- MODAL DE LOGOUT QUANDO CLICA NO PERFIL-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -122,7 +180,6 @@
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="btn btn-primary" name="logout">Sair</button>
                     </form>
-
                     <!-- ENCERRA SESSAO E VOLTA AO INICIO -->
                     <?php
                     if (isset($_POST['logout'])) {
@@ -151,37 +208,3 @@
 </body>
 
 </html>
-
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<!-- CADASTRA PROCEDIMENTO -->
-
-<?php
-
-include 'connect.php';
-
-if (isset($_POST['cadastrarprocedimento'])) {
-    $procedimento = $_POST['procedimento'];
-    $tempo = $_POST['tempo'];
-    $informacoesadicionais = $_POST['informacoesadicionais'];
-
-
-
-    //$sqlinsertcliente="INSERT INTO cliente VALUES(null,'$nome','$sobrenome','$email','$cpf','$celular','$telefone',$datanascimento,'$endereco','$numero','$cidade','$uf','$cep','$informacoesadicionais',current_timestamp())";
-    $sqlinsertprocedimento = "INSERT INTO procedimento VALUES(null,?,?,?)";
-
-    $sqlinsert = $pdo->prepare($sqlinsertprocedimento);
-    $sqlinsert->execute(array($procedimento, $tempo, $informacoesadicionais));
-    //$sqlinsert->execute();
-
-    if ($sqlinsert) {
-
-        echo '<script type="text/javascript">
-        swal("", "Procedimento cadastrado com sucesso!", "success");
-        </script>';
-    } else {
-        echo '<script type="text/javascript">
-        swal("", "Erro ao cadastrar Procedimento!", "error");
-        </script>';
-    }
-}
-?>

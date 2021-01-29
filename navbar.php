@@ -1,5 +1,8 @@
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- VERIFICA SE SESSAO FOI INICIADA CERTO -->
 <?php
     session_start();
+    include 'connect.php';
 
     if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
     unset($_SESSION['login']);
@@ -11,7 +14,7 @@
 
 
    }?>
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,37 +36,33 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
-        <!-- Sidebar -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <!-- INICIO DA SIDEBAR -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
+            <!--TITULO PRINCIPAL DA SIDE BAR -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fab fa-fly"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Studio<sup>2</sup></div>
             </a>
-
-            <!-- Divider -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- DIVISOR -->
             <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- PRIMEIRO ITEM DA SIDE BAR -->
             <li class="nav-item active">
                 <a class="nav-link" href="home.php">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Agenda</span></a>
             </li>
-
-            <!-- Divider -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- DIVISOR -->
             <hr class="sidebar-divider">
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-            <!-- Heading -->
-            <!--<div class="sidebar-heading">
-                Interface
-            </div>-->
-
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- LISTA DO SUB MENU DE CLIENTES -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-users"></i>
@@ -77,8 +76,8 @@
                     </div>
                 </div>
             </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- MENU DE SUBITENS DE FUNCIONARIOS  -->
             <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-user-alt"></i>
@@ -92,11 +91,11 @@
                     </div>
                 </div>
             </li> -->
-
-            <!-- Divider -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- DIVISOR -->
             <hr class="sidebar-divider">
-
-            <!-- Nav Item - Pages Collapse Menu -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+            <!-- MENU DE SUBITENS DE PROCEDIMENTOS -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-paint-brush"></i>
@@ -114,7 +113,7 @@
                     </div>
                 </div>
             </li>
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">

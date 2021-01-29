@@ -28,11 +28,12 @@ include 'navbar.php';
 </head>
 
 <body id="page-top">
-
-                <!-- Begin Page Content -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                <!-- INICIO DA PAGINA -->
                 <div class="container-fluid">
-
-                    <!-- Circle Buttons -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    
+                <!-- INICIO DO FORM DE ATUALIZAR PERFIL -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Dados do perfil</h6>
@@ -42,41 +43,42 @@ include 'navbar.php';
                         <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="imagem">Imagem:</label>
-                                    <input type="file" name="imagem"/>
+                                    <input type="file" name="foto_perfil"/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <img class="img-profile rounded-circle" width=120 height=80 src="<?php echo $_SESSION['foto_perfil'];?>">
+                                    <img width=220 height=140 src="<?php echo $_SESSION['foto_perfil'];?>">
                                 </div>
                             </div>
                             
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="procedimento">Nome</label>
-                                    <input type="text" placeholder="<?php echo $_SESSION['usuario'];?>" name="procedimento" class="form-control" id="procedimento">
+                                    <label for="procedimento">Usuario</label>
+                                    <input type="text" value="<?php echo $_SESSION['usuario'];?>" name="usuario" class="form-control" id="procedimento">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Email</label>
-                                    <input type="text" placeholder="<?php echo $_SESSION['email'];?>" name="Email" class="form-control" id="Email">
+                                    <input type="text" value="<?php echo $_SESSION['email'];?>" name="email" class="form-control" id="Email">
                                 </div>
                             </div>
+
+                            <hr class=sidebar-devider>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Senha atual</label>
-                                    <input type="text" name="informacoesadicionais" class="form-control" id="informacoesadicionais">
+                                    <input type="password" name="senha" class="form-control" id="informacoesadicionais">
                                 </div>
                             </div>
-                            <hr class=sidebar-devider>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Nova senha</label>
-                                    <input type="text" name="informacoesadicionais" class="form-control" id="informacoesadicionais">
+                                    <input type="password" name="novasenha" class="form-control" id="informacoesadicionais">
                                 </div>
                             </div>
-                            <button type="submit" name="cadastrarprocedimento" id="cadastrarprocedimento" class="btn btn-primary">Cadastrar</button>
+                            <button type="submit" name="atualizarperfil" id="atualizarperfil" class="btn btn-primary">Atualizar</button>
                         </form>
                     </div>
                 </div>
@@ -84,6 +86,7 @@ include 'navbar.php';
 
             </div>
             <!-- End of Main Content -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -94,19 +97,16 @@ include 'navbar.php';
                 </div>
             </footer>
             <!-- End of Footer -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
+    <!-- BOTAO QUE SOBE AO TOPO DA PAGINA-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- MODAL DE LOGOUT ENCERRA SESSAO -->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -134,7 +134,7 @@ include 'navbar.php';
                 </div>
             </div>
         </div>
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -155,3 +155,55 @@ include 'navbar.php';
 </body>
 
 </html>
+
+<?php
+
+if(isset($_POST['atualizarperfil'])){
+
+$usuario = $_POST['usuario'];
+$email = $_POST['email'];
+$senha = $_POST['senha'];
+$novasenha = $_POST['novasenha'];
+$fotoperfil = $_POST['foto_perfil'];
+
+$sqlselect="SELECT usuario,email,senha,foto_perfil FROM usuario_adm WHERE usuario ='".$_SESSION['usuario']."'";
+
+$sqldadosadm = $pdo->prepare($sqlselect);
+// print_r($sqldadosadm);
+$sqldadosadm->execute();
+
+$result=$sqldadosadm->fetch(PDO::FETCH_ASSOC);
+echo 'ola mundo seu merda';
+// print_r($sqlselect);
+// die();
+
+    if($senha===$result['senha']){
+
+        if($usuario != $result['usuario']){
+            $sqlupdateusuario = $pdo->prepare("UPDATE usuario_adm SET usuario = '".$usuario."' WHERE usuario = '".$_SESSION['usuario']."';");
+            $sqlupdateusuario -> execute();
+            $_SESSION['usuario']=$usuario;
+        }
+
+        if($email != $result['email']){
+            $sqlupdateusuarioemail=$pdo->prepare("UPDATE usuario_adm SET email = '".$email."' WHERE usuario = '".$_SESSION['usuario']."';");
+            $sqlupdateusuarioemail -> execute();
+            $_SESSION['email']=$email;
+        }
+
+        if($novasenha != $result['senha']){
+            $sqlupdateusuariofotoperfil=$pdo->prepare("UPDATE usuario_adm SET senha = '".$senha."' WHERE usuario = '".$_SESSION['usuario']."';");    
+            $sqlupdateusuariosenha -> execute();
+            $_SESSION['senha']=$senha;
+        }
+
+        echo "<script>alert('Dados atualizados com sucesso!')</script>";
+
+    }else{
+        echo "<script>alert('Insira a senha para atualizar os dados!')</script>";
+    }
+
+
+}
+
+?>

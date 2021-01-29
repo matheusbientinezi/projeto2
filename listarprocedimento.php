@@ -47,8 +47,7 @@
                                 <th>Procedimento</th>
                                 <th>Tempo</th>
                                 <th>Informações</th>
-                                <th>Visualizar</th>
-                                <th>Excluir</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,8 +68,8 @@
                                 echo '<td>' . $procedimento['procedimento'] . '</td>';
                                 echo '<td>' . $procedimento['tempo'] . '</td>';
                                 echo '<td>' . $procedimento['informacoesadicionais'] . '</td>';
-                                echo '<td><button type="button" class="btn btn-info">Editar</button></td>';
-                                echo "<td><button id='excluir' type='button' class='btn btn-danger' onclick='excluirRegistro({$procedimento['id']})'>Excluir</button></form></td>";
+                                echo '<td><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
+                                                          <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>';
                                 echo '</tr>';
                             }
                             ?>
