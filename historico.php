@@ -33,40 +33,70 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+        <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
         <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-            For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+            For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Histórico de Agendamentos</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Procedimento</th>
+                                <th>Funcionário</th>
+                                <th>Dia</th>
+                                <th>Horário</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <!-- <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Procedimento</th>
+                                <th>Funcionário</th>
+                                <th>Dia</th>
+                                <th>Horário</th>
+                                <th>Ações</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                         <tbody>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->                    
+                        <!-- BUSCA OS DADOS NO BANCO PARA LISTAR -->
+                        <?php
+                                include 'connect.php';
 
+                                $sqlselect="SELECT a.id, b.nome,c.procedimento, d.funcionario, a.data_agendada, a.hora_inicio
+                                            FROM agenda a
+                                            INNER JOIN cliente b
+                                            INNER JOIN procedimento c
+                                            INNER JOIN funcionario d";
+                                
+                                $selectagenda = $pdo->prepare($sqlselect);
+                                $selectagenda->execute();
+
+                                $result=$selectagenda->fetchAll(PDO::FETCH_ASSOC);
+
+                                foreach($result as $agenda){
+                                    echo '<tr>';
+                                    echo '<td>'.$agenda['id'].'</td>';
+                                    echo '<td>'.$agenda['nome'].'</td>';
+                                    echo '<td>'.$agenda['procedimento'].'</td>';
+                                    echo '<td>'.$agenda['funcionario'].'</td>';
+                                    echo '<td>'.$agenda['data_agendada'].'</td>';
+                                    echo '<td>'.$agenda['hora_inicio'].'</td>';
+                                    echo '<td><a type="button" href="perfilcliente.php" class="btn btn-info"><i class="fas fa-eye"></i></a>';
+                                    echo '</tr>';
+                                }
+                            ?>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                         </tbody>
                     </table>
                 </div>

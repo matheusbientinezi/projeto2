@@ -68,8 +68,8 @@
                                 echo '<td>' . $procedimento['procedimento'] . '</td>';
                                 echo '<td>' . $procedimento['tempo'] . '</td>';
                                 echo '<td>' . $procedimento['informacoesadicionais'] . '</td>';
-                                echo '<td><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
-                                                          <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>';
+                                echo '<td><a type="button" href="perfilprocedimento.php" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                          <a type="button" id="excluirprocedimento" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>';
                                 echo '</tr>';
                             }
                             ?>
@@ -160,26 +160,24 @@
 
 
 <script>
-    function excluirRegistro(id){
-
-        swal({
-                    title: "Tem certeza ?",
-                    text: "Uma vez deletado, terá que recadastrar o procedimento!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
+        $("#excluirprocedimento").click(function(){
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
                 })
                 .then((willDelete) => {
-                    if (willDelete) {
-                        swal("Procedimento excluido com sucesso!", {
-                            icon: "success",
-                            buttons:false,
-                        });
-                        window.location.href = "delete.php?id=" + id;
-                    } else {
-                        swal("Exclusão de procedimento cancelada!");
-                    }
+                if (willDelete) {
+                    swal("Poof! Your imaginary file has been deleted!", {
+                    icon: "success",
+                    });
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
                 });
-        }
-
+        
+        });
+        
 </script>
