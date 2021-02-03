@@ -27,7 +27,7 @@ include 'navbar.php';
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="sidebar-toggled">
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                 <!-- INICIO DA PAGINA -->
                 <div class="container-fluid">
@@ -46,7 +46,7 @@ include 'navbar.php';
                                     <input type="file" name="foto_perfil"/>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <img width=220 height=140 src="<?php echo $_SESSION['foto_perfil'];?>">
+                                    <img width=180 height=180 src="<?php echo $_SESSION['foto_perfil'];?>">
                                 </div>
                             </div>
                             

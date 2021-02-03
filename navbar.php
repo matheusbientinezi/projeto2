@@ -38,14 +38,16 @@
     <div id="wrapper">
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
         <!-- INICIO DA SIDEBAR -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar-fixed-top" id="accordionSidebar">
 
             <!--TITULO PRINCIPAL DA SIDE BAR -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fab fa-fly"></i>
+                <div class="sidebar-brand-icon">
+                <img src="imagem\logo.png" height="50px" width="55px">  
                 </div>
-                <div class="sidebar-brand-text mx-3">Studio<sup>2</sup></div>
+                <div class="sidebar-brand-text mx-0">
+                <img src="imagem\dellas.png" height="50px" width="120px">                
+                </div>
             </a>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             <!-- DIVISOR -->
