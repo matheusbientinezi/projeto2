@@ -126,6 +126,4 @@ $result=$sqllogin->fetch(PDO::FETCH_ASSOC);
 
 }
 
-
-
 ?>
