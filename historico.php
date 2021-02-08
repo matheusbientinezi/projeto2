@@ -79,6 +79,7 @@
                                             INNER JOIN procedimento c
                                             INNER JOIN funcionario d
                                             on a.id_cliente = b.id
+                                            and a.id_procedimento = c.id
                                             ";
                                 
                                 $selectagenda = $pdo->prepare($sqlselect);

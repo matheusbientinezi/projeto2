@@ -55,7 +55,7 @@
 
                             include 'connect.php';
 
-                            $sqlselect = "SELECT id,procedimento,tempo,informacoesadicionais FROM procedimento";
+                            $sqlselect = "SELECT id,procedimento,tempo,informacoesadicionais FROM procedimento WHERE status = 'A'";
 
                             $selectprocedimento = $pdo->prepare($sqlselect);
                             $selectprocedimento->execute();
@@ -63,16 +63,19 @@
                             $result = $selectprocedimento->fetchAll(PDO::FETCH_ASSOC);
 
                             foreach ($result as $procedimento) {
-                                echo '<tr>';
-                                echo '<td>' . $procedimento['id'] . '</td>';
-                                echo '<td>' . $procedimento['procedimento'] . '</td>';
-                                echo '<td>' . $procedimento['tempo'] . '</td>';
-                                echo '<td>' . $procedimento['informacoesadicionais'] . '</td>';
-                                echo '<td><a type="button" href="perfilprocedimento.php" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                          <a type="button" id="excluirprocedimento" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>';
-                                echo '</tr>';
-                            }
                             ?>
+                                <tr>
+                                <td> <?php echo $procedimento['id'];?></td>
+                                <td> <?php echo $procedimento['procedimento'];?></td>
+                                <td> <?php echo $procedimento['tempo'];?></td>
+                                <td> <?php echo $procedimento['informacoesadicionais'];?></td>
+                                <td>
+                                <button type="button" id_editar_procedimento = "<?php echo $procedimento['id'];?>" class="perfil_procedimento btn btn-info"><i class="fas fa-eye"></i></button>
+                                <button type="button" id_excluir_procedimento = "<?php echo $procedimento['id'];?>" class="id_excluir_procedimento btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                                </tr>
+
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -117,38 +120,45 @@
 
 </html>
 
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- FUNÇÃO DELETE DO SWEET ALERT -->
 <script>
-        function sleep(milliseconds) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds){
-            break;
-    }
-  };
-}
 
-</script>
+$('button.id_excluir_procedimento').click(function excluir(){
+    var id_excluir_procedimento = $(this).attr('id_excluir_procedimento');
+    var el = $(this).parent().parent();
+    swal({
+        title: "Tem certeza ?",
+        text: "Todos os dados relacionados ao procedimento serão excluidos",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                method:'post',
+                data:{'id_excluir_procedimento':id_excluir_procedimento},
+                url:'deletar.php'
 
-
-<script>
-        $("#excluirprocedimento").click(function(){
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
+            }).done(function(){
+                el.fadeOut(function(){
+                    el.remove();
                 })
-                .then((willDelete) => {
-                if (willDelete) {
-                    swal("Poof! Your imaginary file has been deleted!", {
-                    icon: "success",
-                    });
-                } else {
-                    swal("Your imaginary file is safe!");
-                }
-                });
-        
+            });
+            swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+            
+            });
+        } else {
+            swal("Your imaginary file is safe!");
+        }
         });
-        
+
+    });
+
+
+
 </script>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->

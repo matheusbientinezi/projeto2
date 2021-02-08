@@ -201,14 +201,15 @@ if (isset($_POST['cadastrarcliente'])) {
     $uf = $_POST['uf'];
     $cep = $_POST['cep'];
     $informacoesadicionais = $_POST['informacoesadicionais'];
+    $status = 'A';
 
 
 
     //$sqlinsertcliente="INSERT INTO cliente VALUES(null,'$nome','$sobrenome','$email','$cpf','$celular','$telefone',$datanascimento,'$endereco','$numero','$cidade','$uf','$cep','$informacoesadicionais',current_timestamp())";
-    $sqlinsertcliente = "INSERT INTO cliente VALUES(null,?,?,?,?,?,?,?,?,?,?,?,?,?,current_timestamp())";
+    $sqlinsertcliente = "INSERT INTO cliente VALUES(null,?,?,?,?,?,?,?,?,?,?,?,?,?,current_timestamp(),?)";
 
     $sqlinsert = $pdo->prepare($sqlinsertcliente);
-    $sqlinsert->execute(array($nome, $sobrenome, $email, $cpf, $celular, $telefone, $datanascimento, $endereco, $numero, $cidade, $uf, $cep, $informacoesadicionais));
+    $sqlinsert->execute(array($nome, $sobrenome, $email, $cpf, $celular, $telefone, $datanascimento, $endereco, $numero, $cidade, $uf, $cep, $informacoesadicionais,$status));
     //$sqlinsert->execute();
 
     if ($sqlinsert) {

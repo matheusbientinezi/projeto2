@@ -133,14 +133,15 @@ if (isset($_POST['cadastrarprocedimento'])) {
     $procedimento = $_POST['procedimento'];
     $tempo = $_POST['tempo'];
     $informacoesadicionais = $_POST['informacoesadicionais'];
+    $status = 'A';
 
 
 
     //$sqlinsertcliente="INSERT INTO cliente VALUES(null,'$nome','$sobrenome','$email','$cpf','$celular','$telefone',$datanascimento,'$endereco','$numero','$cidade','$uf','$cep','$informacoesadicionais',current_timestamp())";
-    $sqlinsertprocedimento = "INSERT INTO procedimento VALUES(null,?,?,?)";
+    $sqlinsertprocedimento = "INSERT INTO procedimento VALUES(null,?,?,?,?)";
 
     $sqlinsert = $pdo->prepare($sqlinsertprocedimento);
-    $sqlinsert->execute(array($procedimento, $tempo, $informacoesadicionais));
+    $sqlinsert->execute(array($procedimento, $tempo, $informacoesadicionais,$status));
     //$sqlinsert->execute();
 
     if ($sqlinsert) {

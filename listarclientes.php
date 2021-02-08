@@ -65,7 +65,7 @@ include 'navbar.php';
                                             <?php
                                             include 'connect.php';
 
-                                            $sqlselect="SELECT id,nome,sobrenome,celular FROM cliente";
+                                            $sqlselect="SELECT id,nome,sobrenome,celular FROM cliente WHERE status = 'A' ";
                                             
                                             $selectcliente = $pdo->prepare($sqlselect);
                                             $selectcliente->execute();
@@ -73,16 +73,18 @@ include 'navbar.php';
                                             $result=$selectcliente->fetchAll(PDO::FETCH_ASSOC);
 
                                             foreach($result as $cliente){
-                                                echo '<tr>';
-                                                echo '<td>'.$cliente['id'].'</td>';
-                                                echo '<td>'.$cliente['nome'].'</td>';
-                                                echo '<td>'.$cliente['sobrenome'].'</td>';
-                                                echo '<td>'.$cliente['celular'].'</td>';
-                                                echo '<td><a type="button" href="perfilcliente.php" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                                <a id="excluircliente" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>';
-                                                echo '</tr>';
-                                            }
-                                        ?>
+                                            ?>
+                                                <tr>
+                                                <td><?php echo $cliente['id'];?></td>
+                                                <td><?php echo $cliente['nome'];?></td>
+                                                <td><?php echo $cliente['sobrenome'];?></td>
+                                                <td><?php echo $cliente['celular'];?></td>
+                                                <td>
+                                                <button type="button" id_editar_cliente="<?php echo $cliente['id'];?> " class="id-editar-cliente btn btn-info"><i class="fas fa-eye"></i></button>
+                                                <button type="button" id_cliente="<?php echo $cliente['id'];?>" class="id_cliente btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                                </td>
+                                                </tr>
+                                        <?php } ?>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                                     </tbody>
                                 </table>
@@ -133,20 +135,53 @@ include 'navbar.php';
 
 </html>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-<!-- FUNÇÃOA DO SWEET ALERT -->
+<!-- FUNÇÃO SELECT DO SWEET ALERT -->
+ 
 <script>
-        $("#excluircliente").click(function(){
+
+$('button.id-editar-cliente').click(function editar(){
+    var id_editar_cliente = $(this).attr('id_editar_cliente');
+    
+        $.ajax({
+            method:'post',
+            data:{'id_editar_cliente':id_editar_cliente},
+            url:'editar.php'
+
+        }).done(function(){
+            window.location.href = "perfilcliente.php"
+        });
+    });
+
+
+
+</script>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- FUNÇÃO DELETE DO SWEET ALERT -->
+    <script>
+
+        $('button.id_cliente').click(function excluir(){
+            var id_cliente = $(this).attr('id_cliente');
+            var el = $(this).parent().parent();
             swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
+                title: "Tem certeza ?",
+                text: "Todos os dados relacionados ao cliente serão excluidos",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
                 })
                 .then((willDelete) => {
                 if (willDelete) {
-                    // window.location.href= "deletecliente.php",
+                    $.ajax({
+                        method:'post',
+                        data:{'id_cliente':id_cliente},
+                        url:'deletar.php'
+
+                    }).done(function(){
+                        el.fadeOut(function(){
+                            el.remove();
+                        })
+                    });
                     swal("Poof! Your imaginary file has been deleted!", {
                     icon: "success",
                     
@@ -161,3 +196,4 @@ include 'navbar.php';
         
         
 </script>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
