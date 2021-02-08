@@ -1,6 +1,9 @@
 <?php
 include 'navbar.php';
 
+include 'editar.php';
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

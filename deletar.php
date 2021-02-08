@@ -21,5 +21,4 @@ $sql = $pdo->prepare("UPDATE procedimento SET status= 'I' WHERE id = ?");
 $sql->execute(array($_POST['id_excluir_procedimento']));
 
 }
-
 ?>
