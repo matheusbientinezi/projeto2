@@ -87,18 +87,18 @@
 
                                 $result=$selectagenda->fetchAll(PDO::FETCH_ASSOC);
 
-                                foreach($result as $agenda){
-                                    echo '<tr>';
-                                    echo '<td>'.$agenda['id'].'</td>';
-                                    echo '<td>'.$agenda['nome'].'</td>';
-                                    echo '<td>'.$agenda['procedimento'].'</td>';
-                                    echo '<td>'.$agenda['funcionario'].'</td>';
-                                    echo '<td>'.$agenda['data_agendada'].'</td>';
-                                    echo '<td>'.$agenda['hora_inicio'].'</td>';
-                                    echo '<td><a type="button" href="perfilcliente.php" class="btn btn-info"><i class="fas fa-eye"></i></a>';
-                                    echo '</tr>';
-                                }
-                            ?>
+                                foreach($result as $agenda){ ?>
+                                  <tr>
+                                  <td><?php echo $agenda['id'];?></td>
+                                  <td><?php echo $agenda['nome'];?></td>
+                                  <td><?php echo $agenda['procedimento'];?></td>
+                                  <td><?php echo $agenda['funcionario'];?></td>
+                                  <td><?php echo $agenda['data_agendada'];?></td>
+                                  <td><?php echo $agenda['hora_inicio'];?></td>
+                                  <td><button type="button" id_agendamento="<?php echo $agenda['id']?>" class="id_agendamento btn btn-info"><i class="fas fa-eye"></i></button>
+                                  </tr>
+                                
+                                <?php } ?>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                         </tbody>
                     </table>
@@ -134,3 +134,13 @@
 </body>
 
 </html>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- REDIRECIONAMENTO PARA PAGINA DO AGENDAMENTO -->
+
+<script>
+    $('button.id_agendamento').click(function agendamento() {
+        var id_agendamento = $(this).attr('id_agendamento');
+        window.location.href = "agendamento.php?id_agendamento="+id_agendamento;
+    });
+</script>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->

@@ -1,9 +1,12 @@
 <?php
 include 'navbar.php';
 
-include 'editar.php';
+    if(isset($_GET['id_editar_cliente'])){
+    $sql = $pdo->prepare("SELECT * FROM cliente WHERE id =?");
+    $sql->execute(array($_GET['id_editar_cliente']));
+    $result = $sql->fetch(PDO::FETCH_ASSOC);
+    }
 
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,22 +56,22 @@ include 'editar.php';
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Nome</label>
-                                    <input type="text" name="nome" class="form-control" id="nome" required>
+                                    <input type="text" value="<?php echo $result['nome'];?>" name="nome" class="form-control" id="nome" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputPassword4">Sobrenome</label>
-                                    <input type="text" name="sobrenome" class="form-control" id="sobrenome" required>
+                                    <input type="text" value="<?php echo $result['sobrenome'];?>" name="sobrenome" class="form-control" id="sobrenome" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Email</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com">
+                                    <input type="email" value="<?php echo $result['email'];?>" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="cpf">CPF</label>
-                                    <input type="text" name="cpf" class="form-control" id="cpf" placeholder="">
+                                    <input type="text" value="<?php echo $result['cpf'];?>" name="cpf" class="form-control" id="cpf" placeholder="">
                                     <script>
                                         $('#cpf').mask('000.000.000-00', {
                                             reverse: true
@@ -79,48 +82,48 @@ include 'editar.php';
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="txttelefone">Celular</label>
-                                    <input type="text" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" />
+                                    <input type="text" value="<?php echo $result['celular'];?>" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" />
                                     <script type="text/javascript">
                                         $("#celular").mask("(00) 0 0000-0000");
                                     </script>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="txttelefone">Telefone</label>
-                                    <input type="text" name="telefone" placeholder="(00) 00000-0000" class="form-control" id="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}" />
+                                    <input type="text" value="<?php echo $result['telefone'];?>" name="telefone" placeholder="(00) 00000-0000" class="form-control" id="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4}" />
                                     <script type="text/javascript">
                                         $("#telefone").mask("(00) 0000-0000");
                                     </script>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputPassword4">Data de Nascimento</label>
-                                    <input type="date" name="datanascimento" class="form-control" id="datanascimento">
+                                    <input type="date" value="<?php echo $result['datanascimento'];?>" name="datanascimento" class="form-control" id="datanascimento">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-10">
                                     <label for="txttelefone">Endereço</label>
-                                    <input type="text" name="endereco" placeholder="Av/Rua nome da rua" class="form-control" id="endereco" />
+                                    <input type="text" value="<?php echo $result['endereco'];?>" name="endereco" placeholder="Av/Rua nome da rua" class="form-control" id="endereco" />
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="txttelefone">Número</label>
-                                    <input type="text" name="numero" class="form-control" id="numero" />
+                                    <input type="text" value="<?php echo $result['numero'];?>" name="numero" class="form-control" id="numero" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputCity">Cidade</label>
-                                    <input type="text" name="cidade" class="form-control" id="cidade">
+                                    <input type="text" value="<?php echo $result['cidade'];?>" name="cidade" class="form-control" id="cidade">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputState" name="uf">UF</label>
                                     <select type="text" id="uf" name="uf" class="form-control">
-                                        <option selected>Choose...</option>
+                                        <option selected><?php echo $result['uf'];?></option>
                                         <option>PR</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="inputZip">CEP</label>
-                                    <input type="text" name="cep" class="form-control" id="cep" pattern="\[0-8]{5}-[0-8]{3}>">
+                                    <input type="text" value="<?php echo $result['cep'];?>" name="cep" class="form-control" id="cep" pattern="\[0-8]{5}-[0-8]{3}>">
                                     <script type="text/javascript">
                                         $("#cep").mask("00000-000");
                                     </script>
@@ -128,9 +131,9 @@ include 'editar.php';
                             </div>
                             <div class="form-group">
                                 <label for="informacoesadicionais">Informacões Adicionais</label>
-                                <input type="text" name="informacoesadicionais" class="form-control" id="informacoesadicionais" placeholder="Ex: Doenças, uso de medicamentos, alergias , etc.">
+                                <input type="text" value="<?php echo $result['informacoesadicionais'];?>" name="informacoesadicionais" class="form-control" id="informacoesadicionais" placeholder="Ex: Doenças, uso de medicamentos, alergias , etc.">
                             </div>
-                            <button type="submit" name="cadastrarcliente" id="cadastrarcliente" class="btn btn-primary">Cadastrar</button>
+                            <button type="submit" name="cadastrarcliente" id="cadastrarcliente" class="btn btn-primary">Salvar Dados</button>
                         </form>
                     </div>
                 </div>

@@ -82,6 +82,7 @@
                                     <td>
                                         <button type="button" id_editar_cliente="<?php echo $cliente['id']; ?> " class="id_editar_cliente btn btn-info"><i class="fas fa-eye"></i></button>
                                         <button type="button" id_cliente="<?php echo $cliente['id']; ?>" class="id_cliente btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="button" id_historico_cliente="<?php echo $cliente['id']; ?>" class="id_historico_cliente btn btn-success"><i class="fas fa-history"></i></button>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -135,20 +136,21 @@
 
 </html>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<!-- FUNÇÃO SELECT DO SWEET ALERT -->
+<!-- REDIRECIONAMENTO PARA PAGINA DE CADASTRO -->
 
 <script>
     $('button.id_editar_cliente').click(function editar() {
         var id_editar_cliente = $(this).attr('id_editar_cliente');
-        console.log(id_editar_cliente)
-        $.ajax({
-            method: 'post',
-            data: {
-                id_editar_cliente
-            },
-            url: 'editar.php'
-        })
-        // window.location.href = "editar.php"
+        window.location.href = "perfilcliente.php?id_editar_cliente="+id_editar_cliente;
+    });
+</script>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- REDIRECIONAMENTO PARA HISTORICO DO CLIENTE -->
+
+<script>
+    $('button.id_historico_cliente').click(function historico() {
+        var id_historico_cliente = $(this).attr('id_historico_cliente');
+        window.location.href = "historicocliente.php?id_historico_cliente="+id_historico_cliente;
     });
 </script>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
