@@ -67,10 +67,10 @@
                                 <tr>
                                 <td> <?php echo $procedimento['id'];?></td>
                                 <td> <?php echo $procedimento['procedimento'];?></td>
-                                <td> <?php echo $procedimento['tempo'];?></td>
+                                <td> <?php echo date('H:i', strtotime($procedimento['tempo']));?></td>
                                 <td> <?php echo $procedimento['informacoesadicionais'];?></td>
                                 <td>
-                                <button type="button" id_editar_procedimento = "<?php echo $procedimento['id'];?>" class="perfil_procedimento btn btn-info"><i class="fas fa-eye"></i></button>
+                                <button type="button" id_editar_procedimento = "<?php echo $procedimento['id'];?>" class="perfil_procedimento btn btn-info"><i class="fas fa-edit"></i></button>
                                 <button type="button" id_excluir_procedimento = "<?php echo $procedimento['id'];?>" class="id_excluir_procedimento btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                                 </tr>

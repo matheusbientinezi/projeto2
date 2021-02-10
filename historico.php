@@ -93,8 +93,8 @@
                                   <td><?php echo $agenda['nome'];?></td>
                                   <td><?php echo $agenda['procedimento'];?></td>
                                   <td><?php echo $agenda['funcionario'];?></td>
-                                  <td><?php echo $agenda['data_agendada'];?></td>
-                                  <td><?php echo $agenda['hora_inicio'];?></td>
+                                  <td><?php echo date('d/m/Y', strtotime($agenda['data_agendada']));?></td>
+                                  <td><?php echo date('H:i',strtotime($agenda['hora_inicio']));?></td>
                                   <td><button type="button" id_agendamento="<?php echo $agenda['id']?>" class="id_agendamento btn btn-info"><i class="fas fa-eye"></i></button>
                                   </tr>
                                 

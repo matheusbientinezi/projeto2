@@ -58,7 +58,7 @@ include 'navbar.php';
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Funcionários</th>
+                                <th>Profissional</th>
                                 <th>Procedimento</th>
                                 <th>Data</th>
                                 <th>Horário</th>
@@ -92,8 +92,8 @@ include 'navbar.php';
                                         <td><?php echo $historico['id']; ?></td>
                                         <td><?php echo $historico['funcionario']; ?></td>
                                         <td><?php echo $historico['procedimento']; ?></td>
-                                        <td><?php echo $historico['data_agendada']; ?></td>
-                                        <td><?php echo $historico['hora_inicio']; ?></td>
+                                        <td><?php echo date('d/m/Y',strtotime($historico['data_agendada'])); ?></td>
+                                        <td><?php echo date('H:i',strtotime($historico['hora_inicio'])); ?></td>
                                         <td>
                                             <button type="button" id_editar_cliente="<?php echo $cliente['id']; ?> " class="id_editar_cliente btn btn-info"><i class="fas fa-eye"></i></button>
                                             <button type="button" id_cliente="<?php echo $cliente['id']; ?>" class="id_cliente btn btn-danger"><i class="fas fa-trash-alt"></i></button>

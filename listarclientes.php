@@ -80,9 +80,10 @@
                                     <td><?php echo $cliente['sobrenome']; ?></td>
                                     <td><?php echo $cliente['celular']; ?></td>
                                     <td>
-                                        <button type="button" id_editar_cliente="<?php echo $cliente['id']; ?> " class="id_editar_cliente btn btn-info"><i class="fas fa-eye"></i></button>
-                                        <button type="button" id_cliente="<?php echo $cliente['id']; ?>" class="id_cliente btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="button" id_editar_cliente="<?php echo $cliente['id']; ?> " class="id_editar_cliente btn btn-info"><i class="fas fa-edit"></i></button>
                                         <button type="button" id_historico_cliente="<?php echo $cliente['id']; ?>" class="id_historico_cliente btn btn-success"><i class="fas fa-history"></i></button>
+                                        <button type="button" id_cliente="<?php echo $cliente['id']; ?>" class="id_cliente btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        
                                     </td>
                                 </tr>
                             <?php } ?>

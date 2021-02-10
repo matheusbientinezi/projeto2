@@ -62,11 +62,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Email</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="cpf">CPF</label>
-                                    <input type="text" name="cpf" class="form-control" id="cpf" placeholder="">
+                                    <input type="text" name="cpf" class="form-control" id="cpf" required>
                                     <script>
                                         $('#cpf').mask('000.000.000-00', {
                                             reverse: true
@@ -77,7 +77,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="txttelefone">Celular</label>
-                                    <input type="text" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" />
+                                    <input type="text" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" required/>
                                     <script type="text/javascript">
                                         $("#celular").mask("(00) 0 0000-0000");
                                     </script>

@@ -83,11 +83,11 @@ include 'navbar.php';
                             </div>
                             <div class="col-md-6">
                                 <label for ="hora_agendamento">Momento do agendamento:</label>
-                                <b><h5 style="background-color:#ececec"><?php echo $result['data_agendamento']?></b></h5>
+                                <b><h5 style="background-color:#ececec"><?php echo date('d/m/Y - H:i', strtotime($result['data_agendamento']));?></b></h5>
                             </div>
                             <div class="col-md-6">
                                 <label for = "data_agendamento">Data do procedimento:</label>
-                                <b><h5 style = "background-color:#b4fdf3" ><?php echo $result['data_agendada']?></b></h5>
+                                <b><h5 style = "background-color:#b4fdf3" ><?php echo date('d/m/Y', strtotime($result['data_agendada']));?></b></h5>
                             </div>
                             <div class="col-md-6">
                                 <label for = "data_agendamento">Procedimento:</label>
@@ -95,11 +95,11 @@ include 'navbar.php';
                             </div>
                             <div class="col-md-6">
                                 <label for = "data_agendamento">Tempo médio procedimento:</label>
-                                <b><h5 style="background-color:#ececec"><?php echo $result['tempo']?></b></h5>
+                                <b><h5 style="background-color:#ececec"><?php echo date('H\hi', strtotime($result['tempo']))?></b></h5>
                             </div>
                             <div class="col-md-6">
                                 <label for ="hora_inicio">Horário:</label>
-                                <b><h5 style = "background-color:#b4fdf3"><?php echo $result['hora_inicio']?></b></h5>
+                                <b><h5 style = "background-color:#b4fdf3"><?php echo date('H:i', strtotime($result['hora_inicio']))?></b></h5>
                             </div>
                             <div class="col-md-12">
                                 <label for ="hora_inicio">Informações adicionais:</label>
