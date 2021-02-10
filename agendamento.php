@@ -1,7 +1,16 @@
 <?php
 include 'navbar.php';
     if(isset($_GET['id_agendamento'])){
-    $sql = $pdo->prepare("SELECT * FROM agenda WHERE id =?");
+
+    $sqlselect = "SELECT a.id, a.data_agendamento, a.data_agendada,a.hora_inicio, a.informacoes_adicionais, a.tempo, c.nome, c.sobrenome, c.email,c.cpf,c.celular,p.procedimento, f.funcionario, f.sobrenome_funcionario
+                  FROM agenda a
+                  INNER JOIN cliente c
+                  INNER JOIN procedimento p
+                  INNER JOIN funcionario f
+                  ON a.id = ".$_GET['id_agendamento']."
+    ";
+
+    $sql = $pdo->prepare($sqlselect);
     $sql->execute(array($_GET['id_agendamento']));
     $result = $sql->fetch(PDO::FETCH_ASSOC);
     }
@@ -53,36 +62,48 @@ include 'navbar.php';
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="nome"><h5><b>Nome:</b></h5></p></label>
-                                <p><?php echo $result['id_cliente'];?></p>
+                                <label for="nome">Nome:</label>
+                                <h5 style="background-color:#ececec"><b><?php echo $result['nome']; echo ' '; echo $result['sobrenome'];?></b></h5>
                             </div>
                             <div class="col-md-6">
-                                <label for="sobrenome"><h5><b>Sobrenome:</b></h5></p></label>
-                                <p><?php echo 'aqui vai o sobrenome'?></p>
+                                <label for="sobrenome">Email:</label>
+                                <h5 style="background-color:#ececec" ><b><?php echo $result['email']?></b></h5>
                             </div>
                             <div class="col-md-6">
-                                <label for="nome"><b><h5>CPF do cliente:</b></h5></p></label>
-                                <p><?php echo 'aqui vai o cpf do cliente';?></p>
+                                <label for="nome">CPF do cliente:</label>
+                                <b><h5 style="background-color:#ececec" ><?php echo $result['cpf'];?></b></h5>
                             </div>
                             <div class="col-md-6">
-                                <label for="sobrenome"><b><h5>Profissional:</b></h5></p></label>
-                                <p><?php echo 'aqui vai o profissional'?></p>
+                                <label for="sobrenome">Profissional:</label>
+                                <b><h5 style="background-color:#ececec" ><p><?php echo $result['funcionario']; echo ' '; echo $result['sobrenome_funcionario']?></p></b></h5>
                             </div>
                             <div class="col-md-6">
-                                <label for ="celular"><b><h5>Contato do cliente:</b></h5></p></label>
-                                <p><?php echo 'Numero do celular do cliente'?></p>
+                                <label for ="celular">Contato do cliente:</label>
+                                <b><h5 style="background-color:#ececec" ><?php echo $result['celular']?></b></h5>
                             </div>
                             <div class="col-md-6">
-                                <label for ="hora_agendamento"><b><h5>Momento do agendamento:</b></h5></p></label>
-                                <p><?php echo $result['data_agendamento']?></p>
+                                <label for ="hora_agendamento">Momento do agendamento:</label>
+                                <b><h5 style="background-color:#ececec"><?php echo $result['data_agendamento']?></b></h5>
                             </div>
                             <div class="col-md-6">
-                                <label for = "data_agendamento"><b><h5>Data do procedimento:</b></h5></p></label>
-                                <p><?php echo $result['data_agendada']?></p>
+                                <label for = "data_agendamento">Data do procedimento:</label>
+                                <b><h5 style = "background-color:#b4fdf3" ><?php echo $result['data_agendada']?></b></h5>
                             </div>
                             <div class="col-md-6">
-                                <label for ="hora_inicio"><b><h5>Horário:</b></h5></p></label>
-                                <p><?php echo $result['hora_inicio']?></p>
+                                <label for = "data_agendamento">Procedimento:</label>
+                                <b><h5 style = "background-color:#b4fdf3"><?php echo $result['procedimento']?></b></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <label for = "data_agendamento">Tempo médio procedimento:</label>
+                                <b><h5 style="background-color:#ececec"><?php echo $result['tempo']?></b></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <label for ="hora_inicio">Horário:</label>
+                                <b><h5 style = "background-color:#b4fdf3"><?php echo $result['hora_inicio']?></b></h5>
+                            </div>
+                            <div class="col-md-12">
+                                <label for ="hora_inicio">Informações adicionais:</label>
+                                <b><h5 style="background-color:#ececec"><?php echo $result['informacoes_adicionais']?></b></h5>
                             </div>
                     </div>
                 </div>
