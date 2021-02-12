@@ -5,6 +5,7 @@ include 'navbar.php';
     $sql = $pdo->prepare("SELECT * FROM cliente WHERE id =?");
     $sql->execute(array($_GET['id_editar_cliente']));
     $result = $sql->fetch(PDO::FETCH_ASSOC);
+    
     }
 
 ?>
@@ -12,15 +13,6 @@ include 'navbar.php';
 <html lang="en">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Projeto Studio</title>
-
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -133,7 +125,7 @@ include 'navbar.php';
                                 <label for="informacoesadicionais">Informacões Adicionais</label>
                                 <input type="text" value="<?php echo $result['informacoesadicionais'];?>" name="informacoesadicionais" class="form-control" id="informacoesadicionais" placeholder="Ex: Doenças, uso de medicamentos, alergias , etc.">
                             </div>
-                            <button type="submit" name="cadastrarcliente" id="cadastrarcliente" class="btn btn-primary">Salvar Dados</button>
+                            <button type="submit" name="salvardados" id="salvardados" class="btn btn-primary">Salvar Dados</button>
                         </form>
                     </div>
                 </div>
@@ -185,3 +177,128 @@ include 'navbar.php';
 </body>
 
 </html>
+<?php
+if(isset($_POST['salvardados'])){
+
+$nome=$_POST['nome'];
+$sobrenome=$_POST['sobrenome'];
+$email=$_POST['email'];
+$cpf=$_POST['cpf'];
+$celular=$_POST['celular'];
+$telefone=$_POST['telefone'];
+$datanascimento=$_POST['datanascimento'];
+$endereco=$_POST['endereco'];
+$numero=$_POST['numero'];
+$cidade=$_POST['cidade'];
+$uf=$_POST['uf'];
+$cep=$_POST['cep'];
+$informacoesadicionais=$_POST['informacoesadicionais'];
+
+    if($nome<>$result['nome']){
+
+        $sqlupdatenome = "UPDATE cliente SET nome='".$_POST['nome']."' WHERE id = ".$result['id']."";
+        $updatenome=$pdo->prepare($sqlupdatenome);
+        $updatenome->execute();
+
+    }
+
+    if($sobrenome<>$result['sobrenome']){
+
+        $sqlupdatesobrenome = "UPDATE cliente SET sobrenome='".$_POST['sobrenome']."' WHERE id = ".$result['id']."";
+        $updatesobrenome=$pdo->prepare($sqlupdatesobrenome);
+        $updatesobrenome->execute();
+
+    }
+    
+    if($email<>$result['email']){
+
+        $sqlupdateemail = "UPDATE cliente SET email='".$_POST['email']."' WHERE id = ".$result['id']."";
+        $updateemail=$pdo->prepare($sqlupdateemail);
+        $updateemail->execute();
+
+    }
+
+    if($cpf<>$result['cpf']){
+
+        $sqlupdatecpf = "UPDATE cliente SET cpf='".$_POST['cpf']."' WHERE id = ".$result['id']."";
+        $updatecpf=$pdo->prepare($sqlupdatecpf);
+        $updatecpf->execute();
+        
+    }
+
+    if($celular<>$result['celular']){
+
+        $sqlupdatecelular = "UPDATE cliente SET celular='".$_POST['celular']."' WHERE id = ".$result['id']."";
+        $updatecelular=$pdo->prepare($sqlupdatecelular);
+        $updatecelular->execute();
+        
+    }
+
+    if($telefone<>$result['telefone']){
+
+        $sqlupdatetelefone = "UPDATE cliente SET telefone='".$_POST['telefone']."' WHERE id = ".$result['id']."";
+        $updatetelefone=$pdo->prepare($sqlupdatetelefone);
+        $updatetelefone->execute();
+        
+    }
+
+    if($datanascimento<>$result['datanascimento']){
+
+        $sqlupdatedatanascimento = "UPDATE cliente SET datanascimento='".$_POST['datanascimento']."' WHERE id = ".$result['id']."";
+        $updatedatanascimento=$pdo->prepare($sqlupdatedatanascimento);
+        $updatedatanascimento->execute();
+        
+    }
+
+    if($endereco<>$result['endereco']){
+
+        $sqlupdateendereco = "UPDATE cliente SET endereco='".$_POST['endereco']."' WHERE id = ".$result['id']."";
+        $updateendereco=$pdo->prepare($sqlupdateendereco);
+        $updateendereco->execute();
+        
+    }
+
+    if($numero<>$result['numero']){
+
+        $sqlupdatenumero = "UPDATE cliente SET numero='".$_POST['numero']."' WHERE id = ".$result['id']."";
+        $updatenumero=$pdo->prepare($sqlupdatenumero);
+        $updatenumero->execute();
+        
+    }
+
+    if($cidade<>$result['cidade']){
+
+        $sqlupdatecidade = "UPDATE cliente SET cidade='".$_POST['cidade']."' WHERE id = ".$result['id']."";
+        $updatecidade=$pdo->prepare($sqlupdatecidade);
+        $updatecidade->execute();
+        
+    }
+
+    if($uf<>$result['uf']){
+
+        $sqlupdateuf = "UPDATE cliente SET uf='".$_POST['uf']."' WHERE id = ".$result['id']."";
+        $updateuf=$pdo->prepare($sqlupdateuf);
+        $updateuf->execute();
+        
+    }
+
+    if($cep<>$result['cep']){
+
+        $sqlupdatecep = "UPDATE cliente SET cep='".$_POST['cep']."' WHERE id = ".$result['id']."";
+        $updatecep=$pdo->prepare($sqlupdatecep);
+        $updatecep->execute();
+        
+    }
+
+    if($informacoesadicionais<>$result['informacoesadicionais']){
+
+        $sqlupdateinformacoesadicionais = "UPDATE cliente SET informacoesadicionais='".$_POST['informacoesadicionais']."' WHERE id = ".$result['id']."";
+        $updateinformacoesadicionais=$pdo->prepare($sqlupdateinformacoesadicionais);
+        $updateinformacoesadicionais->execute();
+        
+    }
+
+
+}
+
+?>
