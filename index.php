@@ -4,22 +4,16 @@ include 'connect.php';
 ?>
 
 <head>
-    <title>SB Admin 2 - Login</title>
-
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+<title>Projeto Studio</title>
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
-
     <div class="container">
-
         <!-- Outer Row -->
         <div class="row justify-content-center">
-
             <div class="col-xl-10 col-lg-12 col-md-9">
-
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -74,18 +68,12 @@ include 'connect.php';
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </body>
 
-
-
-
-
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 <?php
 if(isset($_POST['acao'])){

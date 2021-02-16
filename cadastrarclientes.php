@@ -13,25 +13,66 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 
 <body id="page-top">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- INCLUE NAVBAR COM SESSAO -->
     <?php
     include 'navbar.php';
     ?>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- INICIO DA PAGINA -->
     <div class="container-fluid">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
         <!--TITULO NA PARTE PRINCIPAL-->
         <h1 class="h3 mb-4 text-gray-800">Cadastrar Clientes</h1>
 
         <div class="row">
             <div class="col-lg-12">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+                <?php
+
+                include 'connect.php';
+
+                if (isset($_POST['cadastrarcliente'])) {
+                    $nome = $_POST['nome'];
+                    $sobrenome = $_POST['sobrenome'];
+                    $email = $_POST['email'];
+                    $cpf = $_POST['cpf'];
+                    $celular = $_POST['celular'];
+                    $telefone = $_POST['telefone'];
+                    $datanascimento = $_POST['datanascimento'];
+                    $endereco = $_POST['endereco'];
+                    $numero = $_POST['numero'];
+                    $cidade = $_POST['cidade'];
+                    $uf = $_POST['uf'];
+                    $cep = $_POST['cep'];
+                    $informacoesadicionais = $_POST['informacoesadicionais'];
+                    $status = 'A';
+
+
+
+                    //$sqlinsertcliente="INSERT INTO cliente VALUES(null,'$nome','$sobrenome','$email','$cpf','$celular','$telefone',$datanascimento,'$endereco','$numero','$cidade','$uf','$cep','$informacoesadicionais',current_timestamp())";
+                    $sqlinsertcliente = "INSERT INTO cliente VALUES(null,?,?,?,?,?,?,?,?,?,?,?,?,?,current_timestamp(),?)";
+
+                    $sqlinsert = $pdo->prepare($sqlinsertcliente);
+                    $sqlinsert->execute(array($nome, $sobrenome, $email, $cpf, $celular, $telefone, $datanascimento, $endereco, $numero, $cidade, $uf, $cep, $informacoesadicionais, $status));
+                    //$sqlinsert->execute();
+
+                    if ($sqlinsert) {
+
+                        echo '<script type="text/javascript">
+                        swal("", "Cliente cadastrado com sucesso!", "success");
+                        </script>';
+                    } else {
+                        echo '<script type="text/javascript">
+                        swal("", "Erro ao cadastrar cliente!", "error");
+                        </script>';
+                    }
+                }
+                ?>
+                <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                 <!-- INICIO DIV DE CADASTRO DE CLIENTE -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -68,7 +109,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label for="txttelefone">Celular</label>
-                                    <input type="text" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" required/>
+                                    <input type="text" name="celular" placeholder="(00) 00000-0000" class="form-control" id="celular" pattern="\([0-9]{2}\)[\s][0-9]{1}[\s][0-9]{4}-[0-9]{4}" required />
                                     <script type="text/javascript">
                                         $("#celular").mask("(00) 0 0000-0000");
                                     </script>
@@ -123,7 +164,7 @@
                         </form>
                     </div>
                 </div>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
                 <!-- SEGUNDA DIV QUE PODE USAR-->
                 <!-- <div class="card shadow mb-4">
@@ -133,15 +174,15 @@
                     <div class="card-body">
                     </div>
                 </div> -->
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-            
-            <!-- FECHA DIVS ANTERIORES -->
+                <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+                <!-- FECHA DIVS ANTERIORES -->
             </div>
 
         </div>
 
     </div><!-- /.container-fluid -->
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->    
+    <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -151,7 +192,7 @@
         </div>
     </footer>
     <!-- End of Footer -->
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- BOTAO QUE SOBE AO INICIO DA PAGINA-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -174,45 +215,5 @@
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 <!-- CADASTRA CLIENTE -->
 
-<?php
 
-include 'connect.php';
-
-if (isset($_POST['cadastrarcliente'])) {
-    $nome = $_POST['nome'];
-    $sobrenome = $_POST['sobrenome'];
-    $email = $_POST['email'];
-    $cpf = $_POST['cpf'];
-    $celular = $_POST['celular'];
-    $telefone = $_POST['telefone'];
-    $datanascimento = $_POST['datanascimento'];
-    $endereco = $_POST['endereco'];
-    $numero = $_POST['numero'];
-    $cidade = $_POST['cidade'];
-    $uf = $_POST['uf'];
-    $cep = $_POST['cep'];
-    $informacoesadicionais = $_POST['informacoesadicionais'];
-    $status = 'A';
-
-
-
-    //$sqlinsertcliente="INSERT INTO cliente VALUES(null,'$nome','$sobrenome','$email','$cpf','$celular','$telefone',$datanascimento,'$endereco','$numero','$cidade','$uf','$cep','$informacoesadicionais',current_timestamp())";
-    $sqlinsertcliente = "INSERT INTO cliente VALUES(null,?,?,?,?,?,?,?,?,?,?,?,?,?,current_timestamp(),?)";
-
-    $sqlinsert = $pdo->prepare($sqlinsertcliente);
-    $sqlinsert->execute(array($nome, $sobrenome, $email, $cpf, $celular, $telefone, $datanascimento, $endereco, $numero, $cidade, $uf, $cep, $informacoesadicionais,$status));
-    //$sqlinsert->execute();
-
-    if ($sqlinsert) {
-
-        echo '<script type="text/javascript">
-        swal("", "Cliente cadastrado com sucesso!", "success");
-        </script>';
-    } else {
-        echo '<script type="text/javascript">
-        swal("", "Erro ao cadastrar cliente!", "error");
-        </script>';
-    }
-}
-?>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
