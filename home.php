@@ -1,3 +1,7 @@
+<?php
+include 'navbar.php';
+?>        
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,32 +17,25 @@
 </head>
 
 <body id="page-top">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<!-- ADICIONA NAVBAR COM SESSAO -->
 
-    <?php
-    include 'navbar.php'
-    ?>
-
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-        <!-- INICIO DA PÁGINA -->
+<!-- INICIO DA PÁGINA -->
         <div class="container-fluid">
 
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <!-- TITULO DA PAGINA COM BOTAO À ESQUERDA-->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                 <!-- BOTAO À ESQUERDA -->
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
             </div>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <!-- Content Row -->
             <div class="row">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
                 <!-- AREA PRINCIPIAL DO CALENDARIO-->
                 <div class="col-xl-6 col-lg-6">
                     <div class="card shadow mb-4">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
                         <!-- TITULO DA DIV DO CALENDARIO -->
 
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -59,7 +56,7 @@
 
                             </div>
                         </div>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
                         <!-- CALENDARIO -->
                         <div class="card-body">
                             <div class="chart-area">
@@ -67,7 +64,6 @@
                             <script src="http://momentjs.com/downloads/moment.js"></script>
                             <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css' />
                             <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.js'></script>
-
 
                             <div id='calendar'>
                             <script>
@@ -88,11 +84,11 @@
                         </div>
                     </div>
                 </div>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
                 <!-- AREA PRINCIPIAL DO CALENDARIO-->
                 <div class="col-xl-6 col-lg-6">
                     <div class="card shadow mb-4">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
                          <!-- TITULO DA DIV DO CALENDARIO --> 
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">AGENDA 2</h6>
@@ -112,7 +108,7 @@
                                 
                             </div>
                         </div>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
                         <!-- CALENDARIO -->
                         <div class="card-body">
                             <div class="chart-area">
@@ -121,10 +117,10 @@
                         </div>
                     </div>
                 </div>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             </div>
         </div>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -134,13 +130,12 @@
         </div>
     </footer>
     <!-- End of Footer -->
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<!-- QUADRADINHO QUE VOLTA AO INICIO DA PAGINA-->
+
 
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

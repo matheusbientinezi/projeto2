@@ -1,12 +1,58 @@
 <?php
 include 'navbar.php';
 
+    /** VALIDA SE TEM UPDATE E FAZ O UPDATE*/
     if(isset($_GET['id_editar_cliente'])){
-    $sql = $pdo->prepare("SELECT * FROM cliente WHERE id =?");
-    $sql->execute(array($_GET['id_editar_cliente']));
-    $result = $sql->fetch(PDO::FETCH_ASSOC);
+        $sql = $pdo->prepare("SELECT * FROM cliente WHERE id =?");
+        $sql->execute(array($_GET['id_editar_cliente']));
+        $result = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        }
+
+    if(isset($_POST['salvardados'])){
+
+        $nome=$_POST['nome'];
+        $sobrenome=$_POST['sobrenome'];
+        $email=$_POST['email'];
+        $cpf=$_POST['cpf'];
+        $celular=$_POST['celular'];
+        $telefone=$_POST['telefone'];
+        $datanascimento=$_POST['datanascimento'];
+        $endereco=$_POST['endereco'];
+        $numero=$_POST['numero'];
+        $cidade=$_POST['cidade'];
+        $uf=$_POST['uf'];
+        $cep=$_POST['cep'];
+        $informacoesadicionais=$_POST['informacoesadicionais'];
+
+
+        $sqlupdatenome = "UPDATE cliente 
+                          SET nome='".$_POST['nome']."',
+                              sobrenome ='".$_POST['sobrenome']."',
+                              email='".$_POST['email']."',
+                              cpf='".$_POST['cpf']."',
+                              celular='".$_POST['celular']."',
+                              telefone='".$_POST['telefone']."',
+                              datanascimento='".$_POST['datanascimento']."',
+                              endereco='".$_POST['endereco']."',
+                              numero='".$_POST['numero']."',
+                              cidade='".$_POST['cidade']."',
+                              uf='".$_POST['uf']."',
+                              cep='".$_POST['cep']."',
+                              informacoesadicionais='".$_POST['informacoesadicionais']."'
+                          WHERE id = ".$result['id']."";
+        $updatenome=$pdo->prepare($sqlupdatenome);
+        $updatenome->execute();
+
+    echo '<script type="text/javascript">
+            alert("vacilao morre cedo");
+         </script>';
+
     
-    }
+
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -32,147 +78,16 @@ include 'navbar.php';
     <div class="container-fluid">
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
         <!--TITULO NA PARTE PRINCIPAL-->
-        <h1 class="h3 mb-4 text-gray-800">Cadastrar Clientes</h1>
+        <h1 class="h3 mb-4 text-gray-800"><a href="JavaScript: window.history.back();"><i class="fas fa-chevron-left"></i></a>Atualizar cadastro</h1>
 
         <div class="row">
             <div class="col-lg-12">
 
-<?php
-if(isset($_POST['salvardados'])){
-
-        $nome=$_POST['nome'];
-        $sobrenome=$_POST['sobrenome'];
-        $email=$_POST['email'];
-        $cpf=$_POST['cpf'];
-        $celular=$_POST['celular'];
-        $telefone=$_POST['telefone'];
-        $datanascimento=$_POST['datanascimento'];
-        $endereco=$_POST['endereco'];
-        $numero=$_POST['numero'];
-        $cidade=$_POST['cidade'];
-        $uf=$_POST['uf'];
-        $cep=$_POST['cep'];
-        $informacoesadicionais=$_POST['informacoesadicionais'];
-
-    if($nome<>$result['nome']){
-
-        $sqlupdatenome = "UPDATE cliente SET nome='".$_POST['nome']."' WHERE id = ".$result['id']."";
-        $updatenome=$pdo->prepare($sqlupdatenome);
-        $updatenome->execute();
-
-    }
-
-    if($sobrenome<>$result['sobrenome']){
-
-        $sqlupdatesobrenome = "UPDATE cliente SET sobrenome='".$_POST['sobrenome']."' WHERE id = ".$result['id']."";
-        $updatesobrenome=$pdo->prepare($sqlupdatesobrenome);
-        $updatesobrenome->execute();
-
-    }
-    
-    if($email<>$result['email']){
-
-        $sqlupdateemail = "UPDATE cliente SET email='".$_POST['email']."' WHERE id = ".$result['id']."";
-        $updateemail=$pdo->prepare($sqlupdateemail);
-        $updateemail->execute();
-
-    }
-
-    if($cpf<>$result['cpf']){
-
-        $sqlupdatecpf = "UPDATE cliente SET cpf='".$_POST['cpf']."' WHERE id = ".$result['id']."";
-        $updatecpf=$pdo->prepare($sqlupdatecpf);
-        $updatecpf->execute();
-        
-    }
-
-    if($celular<>$result['celular']){
-
-        $sqlupdatecelular = "UPDATE cliente SET celular='".$_POST['celular']."' WHERE id = ".$result['id']."";
-        $updatecelular=$pdo->prepare($sqlupdatecelular);
-        $updatecelular->execute();
-        
-    }
-
-    if($telefone<>$result['telefone']){
-
-        $sqlupdatetelefone = "UPDATE cliente SET telefone='".$_POST['telefone']."' WHERE id = ".$result['id']."";
-        $updatetelefone=$pdo->prepare($sqlupdatetelefone);
-        $updatetelefone->execute();
-        
-    }
-
-    if($datanascimento<>$result['datanascimento']){
-
-        $sqlupdatedatanascimento = "UPDATE cliente SET datanascimento='".$_POST['datanascimento']."' WHERE id = ".$result['id']."";
-        $updatedatanascimento=$pdo->prepare($sqlupdatedatanascimento);
-        $updatedatanascimento->execute();
-        
-    }
-
-    if($endereco<>$result['endereco']){
-
-        $sqlupdateendereco = "UPDATE cliente SET endereco='".$_POST['endereco']."' WHERE id = ".$result['id']."";
-        $updateendereco=$pdo->prepare($sqlupdateendereco);
-        $updateendereco->execute();
-        
-    }
-
-    if($numero<>$result['numero']){
-
-        $sqlupdatenumero = "UPDATE cliente SET numero='".$_POST['numero']."' WHERE id = ".$result['id']."";
-        $updatenumero=$pdo->prepare($sqlupdatenumero);
-        $updatenumero->execute();
-        
-    }
-
-    if($cidade<>$result['cidade']){
-
-        $sqlupdatecidade = "UPDATE cliente SET cidade='".$_POST['cidade']."' WHERE id = ".$result['id']."";
-        $updatecidade=$pdo->prepare($sqlupdatecidade);
-        $updatecidade->execute();
-        
-    }
-
-    if($uf<>$result['uf']){
-
-        $sqlupdateuf = "UPDATE cliente SET uf='".$_POST['uf']."' WHERE id = ".$result['id']."";
-        $updateuf=$pdo->prepare($sqlupdateuf);
-        $updateuf->execute();
-        
-    }
-
-    if($cep<>$result['cep']){
-
-        $sqlupdatecep = "UPDATE cliente SET cep='".$_POST['cep']."' WHERE id = ".$result['id']."";
-        $updatecep=$pdo->prepare($sqlupdatecep);
-        $updatecep->execute();
-        
-    }
-
-    if($informacoesadicionais<>$result['informacoesadicionais']){
-
-        $sqlupdateinformacoesadicionais = "UPDATE cliente SET informacoesadicionais='".$_POST['informacoesadicionais']."' WHERE id = ".$result['id']."";
-        $updateinformacoesadicionais=$pdo->prepare($sqlupdateinformacoesadicionais);
-        $updateinformacoesadicionais->execute();
-        
-    }
-
-    header("Refresh: 0, url=perfilcliente.php");    
-    echo '  <div class="alert alert-success" role="alert">
-            Cadastro alterado com sucesso!
-            </div>
-        ';
-
-}
-
-?>
-    
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                 <!-- INICIO DIV DE CADASTRO DE CLIENTE -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Insira os dados do cliente</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Insira os Dados do cliente</h6>
                     </div>
                     <div class="card-body">
                         <form method="post">

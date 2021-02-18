@@ -1,11 +1,28 @@
 <?php
 include 'navbar.php';
 
-    if(isset($_GET['id_historico_cliente'])){
-    $sql = $pdo->prepare("SELECT * FROM agenda WHERE id_cliente =?");
-    $sql->execute(array($_GET['id_historico_cliente']));
-    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $sqlselect = "SELECT a.id,c.nome, f.funcionario,p.procedimento,a.data_agendada, a.hora_inicio, a.status 
+    FROM agenda a
+    
+    INNER JOIN procedimento p ON a.id_procedimento = p.id
+    INNER JOIN cliente c ON a.id_cliente = c.id
+    INNER JOIN funcionario f ON a.id_funcionario = f.id
+
+    WHERE a.id_cliente =".$_GET['id_historico_cliente']."";
+
+    $selectcliente = $pdo->prepare($sqlselect);
+    $selectcliente->execute();
+
+    $retorno = $selectcliente->fetchAll(PDO::FETCH_ASSOC);
+
+
+   
+
+    $sqlpeganome="SELECT nome,sobrenome FROM cliente where id=".$_GET['id_historico_cliente']."";
+    $sqlbuscanome= $pdo->prepare($sqlpeganome);
+    $sqlbuscanome -> execute();
+
+    $retornonome = $sqlbuscanome -> fetch(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -27,23 +44,23 @@ include 'navbar.php';
 </head>
 
 <body id="page-top">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 <!-- INICIO DA PAGINA -->
 
     <div class="container-fluid">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 <!--TITULO NA PARTE PRINCIPAL-->
 
-        <h1 class="h3 mb-4 text-gray-800">Histórico de procedimentos</h1>
+<a href="JavaScript: window.history.back();"><i class="fas fa-chevron-left"></i></a><h1 class="h3 mb-4 text-gray-800">Histórico de procedimentos</h1>
 
         <div class="row">
             <div class="col-lg-12">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 <!-- INICIO DIV HISTOTICO CLIENTE -->
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">NOME DO CLIENTE</h6>
+                        <h4 class="m-0 font-weight-bold text-primary"><?php echo $retornonome['nome'];echo ' ' ;echo $retornonome['sobrenome'];?></h4>
                     </div>
                     <div class="card-body">
                         
@@ -65,22 +82,7 @@ include 'navbar.php';
 
                             <?php
 
-                                include 'connect.php';
-
-                                $sqlselect = "SELECT a.id, f.funcionario,p.procedimento,a.data_agendada, a.hora_inicio  FROM agenda a
-                                              INNER JOIN funcionario f                            
-                                              INNER JOIN procedimento p
-                                              INNER JOIN cliente c
-                                              WHERE a.id_cliente = c.id
-                                              AND a.id_procedimento = p.id
-                                              AND a.id_cliente =".$_GET['id_historico_cliente']."";
-
-                                $selectcliente = $pdo->prepare($sqlselect);
-                                $selectcliente->execute();
-
-                                $result = $selectcliente->fetchAll(PDO::FETCH_ASSOC);
-
-                                foreach ($result as $historico) {
+                                foreach ($retorno as $historico) {
                                 ?>
                                     <tr>
                                         <td><?php echo $historico['id']; ?></td>
@@ -89,9 +91,28 @@ include 'navbar.php';
                                         <td><?php echo date('d/m/Y',strtotime($historico['data_agendada'])); ?></td>
                                         <td><?php echo date('H:i',strtotime($historico['hora_inicio'])); ?></td>
                                         <td>
-                                            <button type="button" id_editar_cliente="<?php echo $cliente['id']; ?> " class="id_editar_cliente btn btn-info"><i class="fas fa-eye"></i></button>
-                                            <button type="button" id_cliente="<?php echo $cliente['id']; ?>" class="id_cliente btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                            <button type="button" id_historico_cliente="<?php echo $cliente['id']; ?>" class="id_historico_cliente btn btn-success"><i class="fas fa-history"></i></button>
+                                        <?php
+                                        if($historico['status']=='realizado'){
+                                            echo '
+                                                 <button type="button" id_editar_cliente="'.$historico['id'].'" class="id_editar_cliente btn btn-success disabled">'.$historico['status'].'</button>
+                                                 ';
+                                        }elseif($historico['status']=='cancelado'){
+                                            echo '
+                                                 <button type="button" id_cliente="'.$historico['id'].'" class="id_cliente btn btn-danger disabled">'.$historico['status'].'</button>
+                                                 ';
+                                        
+                                        }elseif($historico['status']=='reagendado'){
+                                            echo '
+                                                 <button type="button" id_historico_cliente="'.$historico['id'].'" class="id_historico_cliente btn btn-warning disabled">'.$historico['status'].'</button>
+                                                 ';    
+                                        }elseif($historico['status']=='agendado'){
+                                            echo '
+                                                 <button type="button" id_historico_cliente="'.$historico['id'].'" class="id_historico_cliente btn btn-info disabled">'.$historico['status'].'</button>
+                                                 ';    
+                                        }
+                                        
+                                        ?>
+                                        
                                         </td>
                                     </tr>
                                 <?php } ?>

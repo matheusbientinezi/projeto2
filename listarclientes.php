@@ -58,12 +58,12 @@
                             include 'connect.php';
 
                             $sqlselect = "SELECT id,nome,sobrenome,celular FROM cliente WHERE status = 'A' ";
-
+                        
                             $selectcliente = $pdo->prepare($sqlselect);
                             $selectcliente->execute();
-
+                        
                             $result = $selectcliente->fetchAll(PDO::FETCH_ASSOC);
-
+                        
                             foreach ($result as $cliente) {
                             ?>
                                 <tr>

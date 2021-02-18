@@ -51,13 +51,11 @@
                         <?php
                                 include 'connect.php';
 
-                                $sqlselect="SELECT a.id, b.nome,c.procedimento, d.funcionario, a.data_agendada, a.hora_inicio
+                                $sqlselect="SELECT a.id,a.status, b.nome,c.procedimento, d.funcionario, a.data_agendada, a.hora_inicio
                                             FROM agenda a
-                                            INNER JOIN cliente b
-                                            INNER JOIN procedimento c
-                                            INNER JOIN funcionario d
-                                            on a.id_cliente = b.id
-                                            and a.id_procedimento = c.id
+                                            INNER JOIN cliente b on a.id_cliente = b.id
+                                            INNER JOIN procedimento c on a.id_procedimento = c.id
+                                            INNER JOIN funcionario d on a.id_funcionario = d.id                                    
                                             ";
                                 
                                 $selectagenda = $pdo->prepare($sqlselect);
@@ -73,7 +71,17 @@
                                   <td><?php echo $agenda['funcionario'];?></td>
                                   <td><?php echo date('d/m/Y', strtotime($agenda['data_agendada']));?></td>
                                   <td><?php echo date('H:i',strtotime($agenda['hora_inicio']));?></td>
-                                  <td><button type="button" id_agendamento="<?php echo $agenda['id']?>" class="id_agendamento btn btn-info"><i class="fas fa-eye"></i></button>
+                                  <?php
+                                  if($agenda['status']=='realizado'){
+                                  echo '<td><button type="button" id_agendamento="'.$agenda['id'].'" class="id_agendamento btn btn-success"><i class="fas fa-eye"></i></button>';
+                                  }elseif($agenda['status']=='cancelado'){
+                                    echo '<td><button type="button" id_agendamento="'.$agenda['id'].'" class="id_agendamento btn btn-danger"><i class="fas fa-eye"></i></button>';
+                                  }elseif($agenda['status']=='reagendado'){
+                                    echo '<td><button type="button" id_agendamento="'.$agenda['id'].'" class="id_agendamento btn btn-warning"><i class="fas fa-eye"></i></button>';
+                                  }elseif($agenda['status']=='agendado'){
+                                    echo '<td><button type="button" id_agendamento="'.$agenda['id'].'" class="id_agendamento btn btn-info"><i class="fas fa-eye"></i></button>';
+                                  }
+                                  ?>
                                   </tr>
                                 
                                 <?php } ?>

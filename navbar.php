@@ -3,9 +3,6 @@ session_start();
 include 'connect.php';
 
     if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
-    unset($_SESSION['login']);
-    unset($_SESSION['senha']);
-    unset($_SESSION['usuario']);
     // echo "<script>alert('Faça login para acessar a página!')</script>";
     header('location: index.php');
     }
@@ -28,7 +25,7 @@ include 'connect.php';
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
         <!-- INICIO DA SIDEBAR -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar-fixed-top" id="accordionSidebar">
 
@@ -41,20 +38,20 @@ include 'connect.php';
                 <img src="imagem\dellas.png" height="50px" width="120px">                
                 </div>
             </a>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <!-- DIVISOR -->
             <hr class="sidebar-divider my-0">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <!-- PRIMEIRO ITEM DA SIDE BAR -->
             <li class="nav-item active">
                 <a class="nav-link" href="home.php">
                     <i class="fas fa-calendar-alt"></i>
                     <span>Agenda</span></a>
             </li>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <!-- DIVISOR -->
             <hr class="sidebar-divider">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
 
             <!-- LISTA DO SUB MENU DE CLIENTES -->
             <li class="nav-item">
@@ -70,7 +67,7 @@ include 'connect.php';
                     </div>
                 </div>
             </li>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <!-- MENU DE SUBITENS DE FUNCIONARIOS  -->
             <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -85,10 +82,10 @@ include 'connect.php';
                     </div>
                 </div>
             </li> -->
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <!-- DIVISOR -->
             <hr class="sidebar-divider">
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <!-- MENU DE SUBITENS DE PROCEDIMENTOS -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -107,7 +104,7 @@ include 'connect.php';
                     </div>
                 </div>
             </li>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -233,7 +230,7 @@ include 'connect.php';
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
                         </li>
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
                         <!-- BARRA DE MENSAGENS -->
                         <!-- Nav Item - Messages -->
                         <!-- <li class="nav-item dropdown no-arrow mx-1">
@@ -294,8 +291,8 @@ include 'connect.php';
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
                         </li> -->
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                       <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -328,9 +325,8 @@ include 'connect.php';
                     </ul>
 
                 </nav>
-                <!-- End of Topbar -->
-                <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-    <!-- MODAL DE LOGOUT QUANDO CLICA NO PERFIL-->
+
+
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -358,7 +354,5 @@ include 'connect.php';
             </div>
         </div>
     </div>
-
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 </body>
 </html>
