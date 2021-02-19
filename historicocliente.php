@@ -51,7 +51,7 @@ include 'navbar.php';
 
 <!--TITULO NA PARTE PRINCIPAL-->
 
-<a href="JavaScript: window.history.back();"><i class="fas fa-chevron-left"></i></a><h1 class="h3 mb-4 text-gray-800">Histórico de procedimentos</h1>
+<h1 class="h3 mb-4 text-gray-800"><a href="JavaScript: window.history.back();"><i class="fas fa-chevron-left"></i></a> Histórico de procedimentos</h1>
 
         <div class="row">
             <div class="col-lg-12">
@@ -94,20 +94,20 @@ include 'navbar.php';
                                         <?php
                                         if($historico['status']=='realizado'){
                                             echo '
-                                                 <button type="button" id_editar_cliente="'.$historico['id'].'" class="id_editar_cliente btn btn-success disabled">'.$historico['status'].'</button>
+                                                 <button type="button" id_agendamento="'.$historico['id'].'" class="id_agendamento btn btn-success disabled">'.$historico['status'].'</button>
                                                  ';
                                         }elseif($historico['status']=='cancelado'){
                                             echo '
-                                                 <button type="button" id_cliente="'.$historico['id'].'" class="id_cliente btn btn-danger disabled">'.$historico['status'].'</button>
+                                                 <button type="button" id_agendamento="'.$historico['id'].'" class="id_agendamento btn btn-danger disabled">'.$historico['status'].'</button>
                                                  ';
                                         
                                         }elseif($historico['status']=='reagendado'){
                                             echo '
-                                                 <button type="button" id_historico_cliente="'.$historico['id'].'" class="id_historico_cliente btn btn-warning disabled">'.$historico['status'].'</button>
+                                                 <button type="button" id_agendamento="'.$historico['id'].'" class="id_agendamento btn btn-warning disabled">'.$historico['status'].'</button>
                                                  ';    
                                         }elseif($historico['status']=='agendado'){
                                             echo '
-                                                 <button type="button" id_historico_cliente="'.$historico['id'].'" class="id_historico_cliente btn btn-info disabled">'.$historico['status'].'</button>
+                                                 <button type="button" id_agendamento="'.$historico['id'].'" class="id_agendamento btn btn-info disabled">'.$historico['status'].'</button>
                                                  ';    
                                         }
                                         
@@ -116,7 +116,16 @@ include 'navbar.php';
                                         </td>
                                     </tr>
                                 <?php } ?>
-                            <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+                                
+                                <!-- REDIRECIONAMENTO PARA PAGINA DO AGENDAMENTO -->
+
+                                <script>
+                                    $('button.id_agendamento').click(function agendamento() {
+                                        var id_agendamento = $(this).attr('id_agendamento');
+                                        window.location.href = "agendamento.php?id_agendamento="+id_agendamento;
+                                    });
+                                </script>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                         </tbody>
                     </table>
                     </div>
@@ -163,3 +172,5 @@ include 'navbar.php';
 
 </body>
 </html>
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->

@@ -27,7 +27,7 @@ include 'connect.php';
     <div id="wrapper">
 
         <!-- INICIO DA SIDEBAR -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar-fixed-top" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!--TITULO PRINCIPAL DA SIDE BAR -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">

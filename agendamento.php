@@ -40,7 +40,7 @@ include 'navbar.php';
     <div class="container-fluid">
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
         <!--TITULO NA PARTE PRINCIPAL-->
-        <h1 class="h3 mb-4 text-gray-800">Agendamento</h1>
+        <h1 class="h3 mb-4 text-gray-800"><a href="JavaScript: window.history.back();"><i class="fas fa-chevron-left"></i></a> Agendamento</h1>
 
         <div class="row">
             <div class="col-lg-12">

@@ -11,8 +11,7 @@ include 'navbar.php';
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="scss/calendario.scss" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -24,7 +23,7 @@ include 'navbar.php';
 
             <!-- TITULO DA PAGINA COM BOTAO À ESQUERDA-->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                <h2 class="h3 mb-0 text-gray-800">Agenda</h2>
                 <!-- BOTAO À ESQUERDA -->
                 <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
             </div>
@@ -33,91 +32,64 @@ include 'navbar.php';
             <div class="row">
 
                 <!-- AREA PRINCIPIAL DO CALENDARIO-->
-                <div class="col-xl-6 col-lg-6">
+                <div class="col-xl-8 col-lg-8">
                     <div class="card shadow mb-4">
 
-                        <!-- TITULO DA DIV DO CALENDARIO -->
-
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">AGENDA 1</h6>
-                            <div class="dropdown no-arrow">
-                        
-                        <!-- TRES BOLINHAS COM DROPDOWN NO CANTO -->
-                                <!-- <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div> -->
-
-                            </div>
-                        </div>
-
                         <!-- CALENDARIO -->
-                        <div class="card-body">
+                        <div class="calendario card-body">
                             <div class="chart-area">
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                            <script src="http://momentjs.com/downloads/moment.js"></script>
-                            <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css' />
-                            <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.js'></script>
 
-                            <div id='calendar'>
+                            <meta charset='utf-8' />
+                            <link href='css/core/main.min.css' rel='stylesheet' />
+                            <link href='css/daygrid/main.min.css' rel='stylesheet' />
+                            <script src='js/core/main.min.js'></script>
+                            <script src='js/interaction/main.min.js'></script>
+                            <script src='js/daygrid/main.min.js'></script>
+                            <script src='js/core/locales/pt-br.js'></script>
                             <script>
 
-                            $(document).ready(function() {
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    var calendarEl = document.getElementById('calendar');
 
-                            // page is now ready, initialize the calendar...
+                                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                                        locale: 'pt-br',
+                                        plugins: ['interaction', 'dayGrid'],
+                                        //defaultDate: '2019-04-12',
+                                        editable: true,
+                                        eventLimit: true,
+                                        events: 'list_eventos.php',
+                                        extraParams: function () {
+                                            return {
+                                                cachebuster: new Date().valueOf()
+                                            };
+                                        }
+                                    });
 
-                            $('#calendar').fullCalendar({
-                                // put your options and callbacks here
-                            })
-
-                            });
+                                    calendar.render();
+                                });
 
                             </script>
+                            <style>
+            
+                            #calendar {
+                                max-width: 900px;
+                                margin: 0 auto;
+                            }
+
+                            </style>
+                            </head>
+                            <body>
+
+                            <div id='calendar'>
+                            </div>
+
+                            </body>                                
+
                             </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- AREA PRINCIPIAL DO CALENDARIO-->
-                <div class="col-xl-6 col-lg-6">
-                    <div class="card shadow mb-4">
-
-                         <!-- TITULO DA DIV DO CALENDARIO --> 
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">AGENDA 2</h6>
-                            <div class="dropdown no-arrow">
-                        
-                        <!-- TRES BOLINHAS COM DROPDOWN NO CANTO -->
-                                <!-- <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div> -->
-                                
-                            </div>
-                        </div>
-
-                        <!-- CALENDARIO -->
-                        <div class="card-body">
-                            <div class="chart-area">
-                            <!-- AQUI VAI O SUPOSTO CALENDARIO DA PAGINA PRINCIPAL -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -144,9 +116,5 @@ include 'navbar.php';
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="js/calendario.js"></script>
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+
 </body>
