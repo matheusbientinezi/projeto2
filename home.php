@@ -1,5 +1,11 @@
 <?php
 include 'navbar.php';
+// $dia = "<script>${i};</script>";
+// $selectagenda = "SELECT * from agenda where data_agendada = ".$dia."";
+// $consultaagenda = $pdo-> prepare($selectagenda);
+// $consultaagenda -> execute();
+// $result = $consultaagenda -> fetchAll(PDO::FETCH_ASSOC);
+// print_r($selectagenda);
 ?>        
 
 <!DOCTYPE html>
@@ -67,14 +73,28 @@ include 'navbar.php';
                             </thead>
                             <tbody>
                             <?php 
-                                for($i=0;$i<25;$i++){
-                                echo'<tr>
-                                    <td>'.$i.'</td>
-                                    <td>Teste2</td>
-                                    <td>Teste3</td>
-                                    <td>Teste4</td>
-                                    <tr>';
-                                }?>
+                                $tempo = '07:00';
+                                
+                                for($i=0;$i<69;$i++){ ?>
+                                    <tr>
+                                    <td><?php echo $tempo;?></td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <?php
+                                        
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        
+                                        ?>
+                                    </td>
+                                    <tr>
+                                   <?php 
+                                   $tempo = date('H:i',strtotime('+15 minute',strtotime($tempo)));
+                                 } ?>
                             </tbody>
                             </table>
                         </div>
@@ -95,6 +115,7 @@ include 'navbar.php';
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <!-- Page level plugins -->
