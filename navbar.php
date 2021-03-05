@@ -20,6 +20,7 @@ include 'connect.php';
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 </head>
 <body id="page-top">
 
@@ -33,6 +34,7 @@ include 'connect.php';
                 <img src="imagem\logo.png" height="50px" width="55px">  
                 </div>
             </a>
+           <div class = testehora>
             <div id="data-hora">
                         <script>
                             // Função para formatar 1 em 01
@@ -53,12 +55,12 @@ include 'connect.php';
                             }, 1000);
                         </script>
                         </div>
-
+                        </div>
             <ul class="navbar-nav ml-auto">
 
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="home.php"  aria-expanded="false">
-                    <i class="fas fa-calendar-alt"></i>
+                    <div class = "testeicone"><i class="fas fa-calendar-alt"></i></div>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Agenda</span>               
                 </a>
             </li>
@@ -67,7 +69,7 @@ include 'connect.php';
 
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-users"></i>
+                    <div class = "testeicone"><i class="fas fa-users"></i></div>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Clientes</span>               
                 </a>
                 <!-- Dropdown - User Information -->
@@ -87,7 +89,7 @@ include 'connect.php';
 
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-users"></i>
+                <div class = "testeicone"><i class="fas fa-users"></i></div>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Funcionários</span>               
                 </a>
                 <!-- Dropdown - User Information -->
@@ -107,7 +109,7 @@ include 'connect.php';
 
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-paint-brush"></i>
+                <div class = "testeicone"><i class="fas fa-paint-brush"></i></div>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Procedimentos</span>               
                 </a>
                 <!-- Dropdown - User Information -->
@@ -127,7 +129,7 @@ include 'connect.php';
 
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="historico.php"  aria-expanded="false">
-                <i class="fas fa-clipboard-list"></i>
+                <div class = "testeicone"><i class="fas fa-clipboard-list"></i></div>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Histórico</span>               
                 </a>
             </li>

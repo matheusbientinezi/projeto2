@@ -6,7 +6,7 @@
   }
 
   .row{
-    background-color: #faf6f8;
+    background-color: #ffffff;
   }
   
   .calendar {
@@ -98,4 +98,12 @@
   }
 td{
   text-align: center!important;
+}
+
+.testeicone{
+  margin-right:5px;
+}
+
+.testehora{
+ margin-left:100px;
 }
