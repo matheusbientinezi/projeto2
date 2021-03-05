@@ -62,38 +62,69 @@ include 'navbar.php';
                 <div class="col-md-8">
                     <div class="lista overflow-auto">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                <th>Horário</th>
-                                <th>Thais</th>
-                                <th>Deise</th>
-                                <th>Amanda</th>
-                                </tr>
-                            </thead>
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
+                                <thead>
+                                    <tr>
+                                    <th>Horário</th>
+                                    <?php
+
+                                    $selectfuncionarios= "SELECT funcionario, sobrenome_funcionario from funcionario";
+                                    $funcionario = $pdo ->prepare($selectfuncionarios);
+                                    $funcionario -> execute();
+                                    $resultfuncionario = $funcionario -> fetchAll(PDO::FETCH_ASSOC);
+                                    $contador= count($resultfuncionario);
+
+                                    for($i=0;$i<=$contador-1; $i++ ){
+                                    ?>
+
+                                    <th><?php 
+                                        $iniciais = substr($resultfuncionario[$i]['sobrenome_funcionario'],0,1);
+                                        echo $resultfuncionario[$i]['funcionario'];
+                                        echo ' ';
+                                        echo $iniciais;
+                                        echo '.';
+                                        ?></th>
+
+                                    <?php
+                                    }
+                                    ?>
+                                    </tr>
+                                </thead>
                             <tbody>
                             <?php 
-                                $tempo = '07:00';
-                                
-                                for($i=0;$i<69;$i++){ ?>
+                                $dia = '';
+                                $tempo = '2021-03-05 07:30:00';
+                                for($j=0;$j<34;$j++){ ?>
                                     <tr>
-                                    <td><?php echo $tempo;?></td>
+                                    <td><?php echo date('H:i',strtotime($tempo));?></td>
+                                    
+                                    <?php 
+                                    for($i=1;$i<=$contador; $i++ ){
+                                    ?>
                                     <td>
+                                    <?php
+                                        $select = "SELECT a.*,b.procedimento, c.nome from agenda a
+                                                    Inner join procedimento b on a.id_procedimento = b.id
+                                                    inner join cliente c on a.id_cliente = c.id
+                                                     where a.id_funcionario =".$i." and a.hora_inicio = '".$tempo."'";
+                                        $selectagenda = $pdo -> prepare($select);
+                                        $selectagenda ->execute();
+                                        $result = $selectagenda ->fetch(PDO::FETCH_ASSOC);
+                                        if(isset($result['id_procedimento'])){
+                                        echo $result['procedimento'];
+                                        echo '<br>';
+                                        echo $result['nome'];
 
+                                        }else{
+                                            echo '<button type="button" class="btn btn-outline-success"><i class="fas fa-plus"></i></button>';
+                                        }
+                                    ?>
                                     </td>
-                                    <td>
-                                        <?php
-                                        
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        
-                                        ?>
-                                    </td>
+                                    <?php }?>
                                     <tr>
+                                        
                                    <?php 
-                                   $tempo = date('H:i',strtotime('+15 minute',strtotime($tempo)));
+                                   $tempo = date('Y-m-d H:i:s',strtotime('+30 minute',strtotime($tempo)));
                                  } ?>
                             </tbody>
                             </table>
@@ -124,9 +155,9 @@ include 'navbar.php';
 
 <?php
 
-function selectHorarios($id_funcionario){
+function selectHorarios($id_funcionario,$horario){
     include 'connect.php';
-    $select = "SELECT * from agenda where id_funcionario =".$id_funcionario."";
+    $select = "SELECT * from agenda where id_funcionario =".$id_funcionario." and hora_inicio = ".$horario."";
     $selectagenda = $pdo -> prepare($select);
     $selectagenda ->execute();
     $result = $selectagenda ->fetchAll(PDO::FETCH_ASSOC);
