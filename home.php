@@ -103,7 +103,7 @@ include 'navbar.php';
                                     ?>
                                     <td>
                                     <?php
-                                        $select = "SELECT a.*,b.procedimento, c.nome from agenda a
+                                        $select = "SELECT a.*,b.procedimento, c.nome, c.sobrenome from agenda a
                                                     Inner join procedimento b on a.id_procedimento = b.id
                                                     inner join cliente c on a.id_cliente = c.id
                                                      where a.id_funcionario =".$i." and a.hora_inicio = '".$tempo."'";
@@ -114,6 +114,8 @@ include 'navbar.php';
                                         echo $result['procedimento'];
                                         echo '<br>';
                                         echo $result['nome'];
+                                        echo ' ';
+                                        echo $result['sobrenome'];
 
                                         }else{
                                             echo '<button type="button" class="btn btn-outline-success"><i class="fas fa-plus"></i></button>';
