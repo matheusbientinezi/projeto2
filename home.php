@@ -68,7 +68,7 @@ include 'navbar.php';
                                     <th>Horário</th>
                                     <?php
 
-                                    $selectfuncionarios= "SELECT funcionario, sobrenome_funcionario from funcionario";
+                                    $selectfuncionarios= "SELECT id,funcionario, sobrenome_funcionario from funcionario";
                                     $funcionario = $pdo ->prepare($selectfuncionarios);
                                     $funcionario -> execute();
                                     $resultfuncionario = $funcionario -> fetchAll(PDO::FETCH_ASSOC);
@@ -99,28 +99,79 @@ include 'navbar.php';
                                     <td><?php echo date('H:i',strtotime($tempo));?></td>
                                     
                                     <?php 
-                                    for($i=1;$i<=$contador; $i++ ){
+                                    for($k=1;$k<=$contador; $k++ ){
                                     ?>
                                     <td>
-                                    <?php
-                                        $select = "SELECT a.*,b.procedimento, c.nome, c.sobrenome from agenda a
-                                                    Inner join procedimento b on a.id_procedimento = b.id
-                                                    inner join cliente c on a.id_cliente = c.id
-                                                     where a.id_funcionario =".$i." and a.hora_inicio = '".$tempo."'";
-                                        $selectagenda = $pdo -> prepare($select);
-                                        $selectagenda ->execute();
-                                        $result = $selectagenda ->fetch(PDO::FETCH_ASSOC);
-                                        if(isset($result['id_procedimento'])){
-                                        echo $result['procedimento'];
-                                        echo '<br>';
-                                        echo $result['nome'];
-                                        echo ' ';
-                                        echo $result['sobrenome'];
+                                        <?php
+                                            $select = "SELECT a.*,b.procedimento, c.nome, c.sobrenome, f.funcionario from agenda a
+                                                        Inner join procedimento b on a.id_procedimento = b.id
+                                                        inner join cliente c on a.id_cliente = c.id
+                                                        inner join funcionario f on f.id = a.id_funcionario
+                                                        where a.id_funcionario =".$k." and a.hora_inicio = '".$tempo."'";
 
-                                        }else{
-                                            echo '<button type="button" class="btn btn-outline-success"><i class="fas fa-plus"></i></button>';
-                                        }
-                                    ?>
+                                            $selectagenda = $pdo -> prepare($select);
+                                            $selectagenda ->execute();
+                                            $result = $selectagenda ->fetch(PDO::FETCH_ASSOC);
+                                            if(isset($result['id_procedimento'])){
+
+                                            
+                                            echo $result['procedimento'];
+                                            echo '<br>';
+                                            echo $result['nome'];
+                                            echo ' ';
+                                            echo $result['sobrenome'];
+
+                                            // while($result['hora_final']<$tempo){
+
+                                            //     echo $result['procedimento'];
+                                            //     echo '<br>';
+                                            //     echo $result['nome'];
+                                            //     echo ' ';
+                                            //     echo $result['sobrenome'];
+                                            //     echo '<br>';
+                                            //     echo $i;
+                                            //      }
+
+                                            
+                                             }else{
+                                                echo '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus">'.$k.'</i></button>';
+                                            }
+                                        ?>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Agemdamento</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-md-12">
+                                                <form>
+                                                    <label for="nome">Cliente:</label>
+                                                    <h5 style="background-color:#ececec"><b><?php echo $result['nome']; echo ' '; echo $result['sobrenome'];?></b></h5>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="sobrenome">Funcionario:</label>
+                                                    <h5 style="background-color:#ececec" ><b>Matheus</b></h5>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="sobrenome">Email:</label>
+                                                    <h5 style="background-color:#ececec" ><b>Matheus</b></h5>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <label for="nome">CPF do cliente:</label>
+                                                    <b><h5 style="background-color:#ececec" >Teste</b></h5>
+                                                </div>
+                                                </form>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <button type="button" class="btn btn-primary">Agendar</button>
+                                        </div>
+                                        </div>
                                     </td>
                                     <?php }?>
                                     <tr>
@@ -154,17 +205,3 @@ include 'navbar.php';
     <!-- Page level plugins -->
 
 </body>
-
-<?php
-
-function selectHorarios($id_funcionario,$horario){
-    include 'connect.php';
-    $select = "SELECT * from agenda where id_funcionario =".$id_funcionario." and hora_inicio = ".$horario."";
-    $selectagenda = $pdo -> prepare($select);
-    $selectagenda ->execute();
-    $result = $selectagenda ->fetchAll(PDO::FETCH_ASSOC);
-
-}
-
-
-?>
