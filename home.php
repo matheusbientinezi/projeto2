@@ -92,14 +92,14 @@ include 'navbar.php';
                                 </thead>
                             <tbody>
                             <?php 
-                                $dia = '';
                                 $tempo = '2021-03-05 07:30:00';
+
                                 for($j=0;$j<34;$j++){ ?>
                                     <tr>
                                     <td><?php echo date('H:i',strtotime($tempo));?></td>
                                     
                                     <?php 
-                                    for($k=1;$k<=$contador; $k++ ){
+                                    for($k=0;$k<=$contador-1; $k++ ){
                                     ?>
                                     <td>
                                         <?php
@@ -107,34 +107,30 @@ include 'navbar.php';
                                                         Inner join procedimento b on a.id_procedimento = b.id
                                                         inner join cliente c on a.id_cliente = c.id
                                                         inner join funcionario f on f.id = a.id_funcionario
-                                                        where a.id_funcionario =".$k." and a.hora_inicio = '".$tempo."'";
+                                                        where a.id_funcionario =".$resultfuncionario[$k]['id']." and a.hora_inicio = '".$tempo."'";
 
                                             $selectagenda = $pdo -> prepare($select);
                                             $selectagenda ->execute();
                                             $result = $selectagenda ->fetch(PDO::FETCH_ASSOC);
                                             if(isset($result['id_procedimento'])){
-
                                             
-                                            echo $result['procedimento'];
-                                            echo '<br>';
-                                            echo $result['nome'];
-                                            echo ' ';
-                                            echo $result['sobrenome'];
+                                                if($result['hora_final']>$tempo){
 
-                                            // while($result['hora_final']<$tempo){
-
-                                            //     echo $result['procedimento'];
-                                            //     echo '<br>';
-                                            //     echo $result['nome'];
-                                            //     echo ' ';
-                                            //     echo $result['sobrenome'];
-                                            //     echo '<br>';
-                                            //     echo $i;
-                                            //      }
-
+                                                    echo $result['procedimento'];
+                                                    echo '<br>';
+                                                    echo $result['nome'];
+                                                    echo ' ';
+                                                    echo $result['sobrenome'];
+                                                    echo '<br>';
+                                                    echo $tempo;
+                                                    echo '<br>';
+                                                    echo $result['hora_final'];
+                                                    echo $resultfuncionario[$k]['id'];
+                                                        }
                                             
                                              }else{
-                                                echo '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus">'.$k.'</i></button>';
+                                                echo '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus">'.$resultfuncionario[$k]['id'].'</i></button>';
+                                                echo '';
                                             }
                                         ?>
 
@@ -149,22 +145,14 @@ include 'navbar.php';
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+                                                <form class="form-row">
                                                 <div class="col-md-12">
-                                                <form>
-                                                    <label for="nome">Cliente:</label>
-                                                    <h5 style="background-color:#ececec"><b><?php echo $result['nome']; echo ' '; echo $result['sobrenome'];?></b></h5>
+                                                    <label for="sobrenome">Profissional:</label>
+                                                    <h5 style="background-color:#ececec" ><b><?php echo $resultfuncionario[$k]['id'] ?></b></h5>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <label for="sobrenome">Funcionario:</label>
-                                                    <h5 style="background-color:#ececec" ><b>Matheus</b></h5>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label for="sobrenome">Email:</label>
-                                                    <h5 style="background-color:#ececec" ><b>Matheus</b></h5>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <label for="nome">CPF do cliente:</label>
-                                                    <b><h5 style="background-color:#ececec" >Teste</b></h5>
+                                                    <label for="sobrenome">Horario:</label>
+                                                    <h5 style="background-color:#ececec" ><b><?php echo $tempo?></b></h5>
                                                 </div>
                                                 </form>
                                             <div class="modal-footer">
@@ -172,6 +160,7 @@ include 'navbar.php';
                                                 <button type="button" class="btn btn-primary">Agendar</button>
                                         </div>
                                         </div>
+
                                     </td>
                                     <?php }?>
                                     <tr>
@@ -191,6 +180,8 @@ include 'navbar.php';
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+    
 
     <!-- Bootstrap core JavaScript-->
     <script src="js/script.js"></script>
