@@ -15,11 +15,12 @@ include 'connect.php';
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Projeto Studio</title>
-<!-- Custom fonts for this template-->
 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-<!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"/>
+<link href="css/sb-admin-2.css" rel="stylesheet">
+<!-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> -->
 <link href="css/style.css" rel="stylesheet">
 </head>
 <body id="page-top">
@@ -75,11 +76,11 @@ include 'connect.php';
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="cadastrarclientes.php">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <i class="fas fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
                         Cadastrar
                     </a>
                     <a class="dropdown-item" href="listarclientes.php">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                         Listar
                     </a>
                 </div>
@@ -95,11 +96,11 @@ include 'connect.php';
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="cadastrarcliente.php">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-user-plus fa-sm fa-fw mr-2 text-gray-400"></i>
                         Cadastrar
                     </a>
                     <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                         Listar
                     </a>
                 </div>
@@ -115,11 +116,11 @@ include 'connect.php';
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="cadastrarprocedimento.php">
-                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-paint-brush fa-sm fa-fw mr-2 text-gray-400"></i>
                         Cadastrar
                     </a>
                     <a class="dropdown-item" href="listarprocedimentos.php">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                         Listar
                     </a>
                 </div>
@@ -144,14 +145,6 @@ include 'connect.php';
                     <a class="dropdown-item" href="perfil.php">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Profile
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -190,5 +183,10 @@ include 'connect.php';
             </div>
         </div>
     </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </body>
 </html>
