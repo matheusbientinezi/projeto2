@@ -6,7 +6,15 @@
   }
 
   .row{
-    background-color: #ffffff;
+    background-color: #faf6f8;
+    margin-bottom: 30px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+  }
+  #rowmodal{
+    margin:1px;
+    background: white;
   }
   
   .calendar {
@@ -95,6 +103,7 @@
     box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);
     height: 450px;
     border-radius: 15px;
+    margin-bottom: 30px;
   }
 td{
   text-align: center!important;
@@ -106,4 +115,20 @@ td{
 
 .testehora{
  margin-left:100px;
+}
+
+
+.lista::-webkit-scrollbar-track {
+  background-color: #F4F4F4;
+}
+.lista::-webkit-scrollbar {
+  width: 6px;
+  background: #F4F4F4;
+}
+.lista::-webkit-scrollbar-thumb {
+  background: #dad7d7;
+}
+
+.label{
+  background-color: blue!important;
 }
