@@ -1,7 +1,7 @@
 <?php
 include 'navbar.php';
 
-    $sqlselect = "SELECT a.id,c.nome, f.funcionario,p.procedimento,a.data_agendada, a.hora_inicio, a.status 
+    $sqlselect = "SELECT a.id,c.nome, f.funcionario,p.procedimento, a.hora_inicio, a.status 
     FROM agenda a
     
     INNER JOIN procedimento p ON a.id_procedimento = p.id
@@ -29,16 +29,11 @@ include 'navbar.php';
 <html lang="en">
 
 <head>
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
     <!-- Jquery mascaras celular e telefone -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
@@ -88,7 +83,7 @@ include 'navbar.php';
                                         <td><?php echo $historico['id']; ?></td>
                                         <td><?php echo $historico['funcionario']; ?></td>
                                         <td><?php echo $historico['procedimento']; ?></td>
-                                        <td><?php echo date('d/m/Y',strtotime($historico['data_agendada'])); ?></td>
+                                        <td><?php echo date('d/m/Y',strtotime($historico['hora_inicio'])); ?></td>
                                         <td><?php echo date('H:i',strtotime($historico['hora_inicio'])); ?></td>
                                         <td>
                                         <?php

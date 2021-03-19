@@ -78,7 +78,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Email</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com" required>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="exemplo@gmail.com">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="cpf">CPF</label>

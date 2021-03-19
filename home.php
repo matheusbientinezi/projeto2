@@ -1,7 +1,6 @@
 <?php
 include 'navbar.php';
 ?>
-
 <body id="page-top">
 
     <!-- INICIO DA PÁGINA -->
@@ -65,13 +64,13 @@ include 'navbar.php';
                                     <tr>
                                         <th>Horário</th>
                                         <th>
-                                        <?php 
-                                        
-                                        echo $resultfuncionario[$i]['funcionario'];
-                                        echo ' ';
-                                        echo $resultfuncionario[$i]['sobrenome_funcionario'];
-                                        
-                                        ?></th>
+                                            <?php
+
+                                            echo $resultfuncionario[$i]['funcionario'];
+                                            echo ' ';
+                                            echo $resultfuncionario[$i]['sobrenome_funcionario'];
+
+                                            ?></th>
                                     </tr>
                                 </thead>
 
@@ -104,14 +103,13 @@ include 'navbar.php';
                                                     echo $result['sobrenome'];
                                                     echo '<br>';
                                                     echo $result['procedimento'];
-                                                    echo $tempo;
                                                 }
                                                 ?>
                                             </td>
                                         </tr>
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModal<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-dialog modal-sm" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Agemdamento</h5>
@@ -120,93 +118,118 @@ include 'navbar.php';
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form class="form-row">
-                                                            <div class="col-md-12">
-                                                                <span class="badge badge-primary">Profissional</span>
-                                                                <h5><?php echo $resultfuncionario[$i]['funcionario'] ?></h5>
+                                                        <form method="post">
+                                                            <div class="row" id="rowmodal">
+                                                                <div class="col-md-12">
+                                                                    <label for="funcionario">Profissional
+                                                                    <h5><input type="text" name="funcionario" id="funcionario" value = "<?php echo $resultfuncionario[$i]['funcionario'];echo ' '; echo $resultfuncionario[$i]['sobrenome_funcionario']; ?>" disabled></h5></input>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                             <div class="row" id="rowmodal">
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary">Dia</span>
-                                                                <h5> <?php echo date('d/m/Y', strtotime($tempo)) ?></h5>
+                                                                <div class="col-md-12">
+                                                                    <label for="dia">Data
+                                                                    <h5><input type="text" name="dia" id="dia" value="<?php echo date('d/m/Y - H:i', strtotime($tempo)) ?>" disabled></h5></input>
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <span class="badge badge-primary">Hora</span>
-                                                                <h5><?php echo date('H:i', strtotime($tempo)) ?></h5>
+                                                            <div class="row" id="rowmodal">
+                                                                <div class="col-md-12">
+                                                                    <label for="procedimento">Procedimento
+                                                                    <?php
+                                                                    $listaprocedimento = "SELECT * FROM procedimento";
+                                                                    $proced = $pdo->prepare($listaprocedimento);
+                                                                    $proced->execute();
+                                                                    $resultproced = $proced->fetchAll(PDO::FETCH_ASSOC);
+                                                                    ?>
+                                                                    <select class="form-control form-control-sm" style="width:250px;">
+                                                                        <option selected></option>
+                                                                        <?php
+                                                                        foreach ($resultproced as $dadosproced) {
+                                                                            print_r($dadoscliente);
+                                                                            echo '<option name = "procedimento" id="procedimento" value="' . $dadosproced['id'] . '">' . $dadosproced['procedimento'] . '</option>';
+                                                                        } ?>
+                                                                    </select>
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <span class="badge badge-primary">Procedimento</span><br>
-                                                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                                                <option selected>Open this select menu</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <span class="badge badge-primary">Cliente</span><br>
-                                                                <?php 
-                                                                    $selectcliente="SELECT id, nome, sobrenome FROM cliente";
-                                                                    $cliente = $pdo -> prepare($selectcliente);
+                                                            <div class="row" id="rowmodal">
+                                                                <div class="col-md-12">
+                                                                    <label for="cliente">Selecione o Cliente
+                                                                    <?php
+                                                                    $selectcliente = "SELECT id, nome, sobrenome FROM cliente where status = 'A'";
+                                                                    $cliente = $pdo->prepare($selectcliente);
                                                                     $cliente->execute();
-                                                                    $resultcliente = $cliente -> fetchAll(PDO::FETCH_ASSOC);
-                                                                ?>
-                                                                <select class="form-select" aria-label="Default select example">
-                                                                <option selected>Selecione o cliente</option>
-                                                                <?php
-                                                                foreach($resultcliente as $dadoscliente){
-                                                                    print_r($dadoscliente);
-                                                                    echo '<option value="'.$dadoscliente['id'].'">'.$dadoscliente['nome'].' '.$dadoscliente['sobrenome'].'</option>';
-                                                                
-                                                                }?>
-                                                                </select>
+                                                                    $resultcliente = $cliente->fetchAll(PDO::FETCH_ASSOC);
+                                                                    ?>
+                                                                    <select class="form-control form-control-sm"  style="width:250px;">
+                                                                        <option selected></option>
+                                                                        <?php
+                                                                        foreach ($resultcliente as $dadoscliente) {
+                                                                            print_r($dadoscliente);
+                                                                            echo '<option name="cliente" id="cliente" value="' . $dadoscliente['id'] . '">' . $dadoscliente['nome'] . ' ' . $dadoscliente['sobrenome'] . '</option>';
+                                                                        } ?>
+                                                                    </select>
+                                                                    </label>
+                                                                </div>
                                                             </div>
-                                                        </form>
+                                                            <div class="rowmodal">
+                                                                <div class="col-md-12">
+                                                                    <label for="informacoesadicionais">Informações Adicionais
+                                                                        <textarea name="iformacoesadicionais" id="informacoesadicionais"  style="width:250px;">
+                                                                        </textarea>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                            <button type="button" class="btn btn-primary">Agendar</button>
+                                                            <button type="button" id="agendar" class="agendar btn btn-primary">Agendar</button>
                                                         </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
                                         <script>
-                                        $('button.id_cliente').click(function excluir() {
-                                            var id_cliente = $(this).attr('id_cliente');
-                                            var el = $(this).parent().parent();
-                                            swal({
-                                                    title: "Tem certeza ?",
-                                                    text: "Todos os dados relacionados ao cliente serão excluidos",
-                                                    icon: "warning",
-                                                    buttons: true,
-                                                    dangerMode: true,
-                                                })
-                                                .then((willDelete) => {
-                                                    if (willDelete) {
-                                                        $.ajax({
-                                                            method: 'post',
-                                                            data: {
-                                                                id_cliente
-                                                            },
-                                                            url: 'deletar.php'
+                                            $('button.agendar').click(function excluir() {
+                                                var id_cliente = $('#funcionario').attr('funcionario');
+                                                var id_cliente = $('#data').attr('data');
+                                                var id_cliente = $('#procedimento').attr('procedimento');
+                                                var id_cliente = $('#cliente').attr('cliente');
 
-                                                        }).done(function() {
-                                                            el.fadeOut(function() {
-                                                                el.remove();
-                                                            })
-                                                        });
-                                                        swal("Cliente excluído com sucesso!", {
-                                                            icon: "success",
+                                                swal({
+                                                        title: "Tem certeza ?",
+                                                        text: "Todos os dados relacionados ao cliente serão excluidos",
+                                                        icon: "warning",
+                                                        buttons: true,
+                                                        dangerMode: true,
+                                                    })
+                                                    .then((willDelete) => {
+                                                        if (willDelete) {
+                                                            $.ajax({
+                                                                method: 'post',
+                                                                data: {
+                                                                    id_cliente
+                                                                },
+                                                                url: 'deletar.php'
 
-                                                        });
-                                                    } else {
-                                                        swal("Exclusão cancelada!");
-                                                    }
-                                                });
+                                                            }).done(function() {
+                                                                el.fadeOut(function() {
+                                                                    el.remove();
+                                                                })
+                                                            });
+                                                            swal("Cliente excluído com sucesso!", {
+                                                                icon: "success",
 
-                                        });
+                                                            });
+                                                        } else {
+                                                            swal("Exclusão cancelada!");
+                                                        }
+                                                    });
+
+                                            });
                                         </script>
                                     <?php
                                         $tempo = date('Y-m-d H:i:s', strtotime('+30 minute', strtotime($tempo)));
@@ -272,4 +295,3 @@ include 'navbar.php';
         </div>
     </div>
 </div>
-

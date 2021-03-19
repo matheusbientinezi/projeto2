@@ -2,12 +2,12 @@
 include 'navbar.php';
     if(isset($_GET['id_agendamento'])){
 
-    $sqlselect = "SELECT a.id, a.data_agendamento, a.data_agendada,a.hora_inicio, a.informacoes_adicionais, a.tempo, c.nome, c.sobrenome, c.email,c.cpf,c.celular,p.procedimento, f.funcionario, f.sobrenome_funcionario
+    $sqlselect = "SELECT a.id, a.data_agendamento,a.hora_inicio, a.informacoes_adicionais, a.tempo, c.nome, c.sobrenome, c.email,c.cpf,c.celular,p.procedimento, f.funcionario, f.sobrenome_funcionario
                   FROM agenda a
-                  INNER JOIN cliente c
-                  INNER JOIN procedimento p
-                  INNER JOIN funcionario f
-                  ON a.id = ".$_GET['id_agendamento']."
+                  INNER JOIN cliente c ON c.id = a.id_cliente
+                  INNER JOIN procedimento p ON p.id = a.id_procedimento
+                  INNER JOIN funcionario f ON f.id=a.id_funcionario
+                  WHERE a.id = ".$_GET['id_agendamento']."
     ";
 
     $sql = $pdo->prepare($sqlselect);
@@ -61,7 +61,7 @@ include 'navbar.php';
                             </div>
                             <div class="col-md-6">
                                 <label for = "data_agendamento">Data do procedimento:</label>
-                                <b><h5 style = "background-color:#b4fdf3" ><?php echo date('d/m/Y', strtotime($result['data_agendada']));?></b></h5>
+                                <b><h5 style = "background-color:#b4fdf3" ><?php echo date('d/m/Y', strtotime($result['hora_inicio']));?></b></h5>
                             </div>
                             <div class="col-md-6">
                                 <label for = "data_agendamento">Procedimento:</label>

@@ -51,7 +51,7 @@
                         <?php
                                 include 'connect.php';
 
-                                $sqlselect="SELECT a.id,a.status, b.nome,c.procedimento, d.funcionario, a.data_agendada, a.hora_inicio
+                                $sqlselect="SELECT a.id,a.status, b.nome,c.procedimento, d.funcionario,a.hora_inicio
                                             FROM agenda a
                                             INNER JOIN cliente b on a.id_cliente = b.id
                                             INNER JOIN procedimento c on a.id_procedimento = c.id
@@ -69,7 +69,7 @@
                                   <td><?php echo $agenda['nome'];?></td>
                                   <td><?php echo $agenda['procedimento'];?></td>
                                   <td><?php echo $agenda['funcionario'];?></td>
-                                  <td><?php echo date('d/m/Y', strtotime($agenda['data_agendada']));?></td>
+                                  <td><?php echo date('d/m/Y', strtotime($agenda['hora_inicio']));?></td>
                                   <td><?php echo date('H:i',strtotime($agenda['hora_inicio']));?></td>
                                   <?php
                                   if($agenda['status']=='realizado'){
