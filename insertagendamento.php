@@ -1,13 +1,11 @@
 <?php 
+$informacoesadicionais = $_POST['informacoesadicionais'];
+$cliente = $_POST['cliente'];
+$funcionario = $_POST['funcionario'];
+$data = $_POST['data'];
+$procedimento = $_POST['procedimento'];
 
-if(isset($_POST['cliente'])){
-
-echo 'teste';
-
-}else{
-
-    echo 'teste 2';
-}
+json_encode("Procedimento é ".$procedimento."");
 
 
 ?>

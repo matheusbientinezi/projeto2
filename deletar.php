@@ -20,5 +20,9 @@ $sql->execute(array($_POST['id_cliente']));
 $sql = $pdo->prepare("UPDATE procedimento SET status= 'I' WHERE id = ?");
 $sql->execute(array($_POST['id_excluir_procedimento']));
 
+}elseif(isset($_POST['id_agendamento'])){
+
+$sql = $pdo->prepare("UPDATE agenda SET status= 'cancelado' WHERE id = ?");
+$sql->execute(array($_POST['id_agendamento']));
 }
 ?>
