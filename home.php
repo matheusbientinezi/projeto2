@@ -37,24 +37,74 @@ include 'navbar.php';
                     <div class="days"></div>
                 </div>
             </div>
+            <div class="col-md-8">
+                <div class="lista overflow-auto">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
+                        <?php
+                            $dataatual = new DateTime();
+                            $hora1 = '00:00:00';
+                            $hora2='23:59:59';
+                            $dataatual = $dataatual->format('Y-m-d');
+
+                            $selectfuncionarios = "SELECT id,funcionario, sobrenome_funcionario from funcionario";
+                
+                            $funcionario = $pdo->prepare($selectfuncionarios);
+                            $funcionario->execute();
+                            $resultfuncionario = $funcionario->fetchAll(PDO::FETCH_ASSOC);
+                            $contador = count($resultfuncionario);
+
+                            $selectdia = "SELECT a.*,b.procedimento, c.nome, c.sobrenome, f.funcionario, f.sobrenome_funcionario from agenda a
+                                            Inner join procedimento b on a.id_procedimento = b.id
+                                            inner join cliente c on a.id_cliente = c.id
+                                            inner join funcionario f on f.id = a.id_funcionario
+                                            where a.hora_inicio between '".$dataatual." ".$hora1."' and '".$dataatual." ".$hora2."'";
+
+                                        $selectagendadia = $pdo->prepare($selectdia);
+                                        $selectagendadia->execute();
+                                        $resultdia = $selectagendadia->fetchAll(PDO::FETCH_ASSOC);
+
+                            
+                            ?>
+                            <thead>
+                                <tr>
+                                    <th>Horário</th>
+                                    <th>Profissional</th>
+                                    <th>Procedimento</th>
+                                    <th>Cliente</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <?php foreach($resultdia as $agendadia){?>
+                                <tr>
+                                    <td>
+                                        <?php echo date('H:i', strtotime($agendadia['hora_inicio'])) ;?>
+                                    </td>
+                                    <td>
+                                        <?php echo $agendadia['funcionario']; echo ' '; echo $agendadia['sobrenome_funcionario'];?>
+                                    </td>
+                                    <td>
+                                        <?php echo $agendadia['procedimento'] ;?>
+                                    </td>
+                                    <td>
+                                        <?php echo $agendadia['nome']; echo ' '; echo $agendadia['sobrenome'];?>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row" id="row">
 
-            <?php
-            $selectfuncionarios = "SELECT id,funcionario, sobrenome_funcionario from funcionario";
-
-            $funcionario = $pdo->prepare($selectfuncionarios);
-            $funcionario->execute();
-            $resultfuncionario = $funcionario->fetchAll(PDO::FETCH_ASSOC);
-            $contador = count($resultfuncionario);
-            ?>
-
             <?php for ($i = 0; $i <= $contador - 1; $i++) {
-
-                $hora = '07:30:00';
-                $dia = '2021-03-05';
-
+            $hora = '07:30:00';
+            $dia = '2021-03-05';
             ?>
                 <div class="col-md-4">
                     <div class="lista overflow-auto">
@@ -83,7 +133,7 @@ include 'navbar.php';
                                                     Inner join procedimento b on a.id_procedimento = b.id
                                                     inner join cliente c on a.id_cliente = c.id
                                                     inner join funcionario f on f.id = a.id_funcionario
-                                                    where a.id_funcionario =" . $resultfuncionario[$i]['id'] . " and a.hora_inicio = '" . $dia. "' '".$hora."'";
+                                                    where a.id_funcionario =" . $resultfuncionario[$i]['id'] . " and a.hora_inicio = '" . $dia. " ".$hora."'";
 
                                         $selectagenda = $pdo->prepare($select);
                                         $selectagenda->execute();
@@ -103,6 +153,7 @@ include 'navbar.php';
                                                 } else {
                                                     ?>
                                                     <div>
+                                                        <button id="iconedetalhesagendamento" data-toggle="modal" data-target="#detalhesagendamento<?php echo $result['id']?>" type="button" class="btn btn-danger"><i class="fas fa-list-ul"></i></button>
                                                         <div class="dados">
                                                         <?php echo $result['nome']; ?>
                                                         <?php echo ' '; ?>
@@ -153,7 +204,7 @@ include 'navbar.php';
 
                                             });
                                         </script>
-                                        <!-- Modal -->
+                                        <!-- Modal 1 -->
                                         <div class="modal fade" id="exampleModal<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-sm" role="document">
                                                 <div class="modal-content">
@@ -193,7 +244,6 @@ include 'navbar.php';
                                                                         <option selected></option>
                                                                         <?php
                                                                         foreach ($resultproced as $dadosproced) {
-                                                                            print_r($dadoscliente);
                                                                             echo '<option name = "procedimento" id="' . $dadosproced['id'] . '" value="' . $dadosproced['id'] . '">' . $dadosproced['procedimento'] . '</option>';
                                                                         } ?>
                                                                     </select>
@@ -237,6 +287,70 @@ include 'navbar.php';
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--MODAL 2-->
+                                        <div class="modal fade bd-example-modal-lg" id="detalhesagendamento<?php echo $result['id']?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="card shadow mb-4">
+                                                                <div class="card-header py-3">
+                                                                    <h6 class="m-0 font-weight-bold text-primary">Dados do agendamento</h6>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <label for="nome">Nome:</label>
+                                                                            <h5 style="background-color:#ececec"><b><?php echo $result['nome']; echo ' '; echo $result['sobrenome'];?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for="sobrenome">Email:</label>
+                                                                            <h5 style="background-color:#ececec" ><b><?php echo $result['email']?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for="nome">CPF do cliente:</label>
+                                                                            <b><h5 style="background-color:#ececec" ><?php echo $result['cpf'];?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for="sobrenome">Profissional:</label>
+                                                                            <b><h5 style="background-color:#ececec" ><p><?php echo $result['funcionario']; echo ' '; echo $result['sobrenome_funcionario']?></p></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for ="celular">Contato do cliente:</label>
+                                                                            <b><h5 style="background-color:#ececec" ><?php echo $result['celular']?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for ="hora_agendamento">Momento do agendamento:</label>
+                                                                            <b><h5 style="background-color:#ececec"><?php echo date('d/m/Y - H:i', strtotime($result['data_agendamento']));?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for = "data_agendamento">Data do procedimento:</label>
+                                                                            <b><h5 style = "background-color:#b4fdf3" ><?php echo date('d/m/Y', strtotime($result['hora_inicio']));?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for = "data_agendamento">Procedimento:</label>
+                                                                            <b><h5 style = "background-color:#b4fdf3"><?php echo $result['procedimento']?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for = "data_agendamento">Tempo médio procedimento:</label>
+                                                                            <b><h5 style="background-color:#ececec"><?php echo date('H\hi', strtotime($result['tempo']))?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for ="hora_inicio">Horário:</label>
+                                                                            <b><h5 style = "background-color:#b4fdf3"><?php echo date('H:i', strtotime($result['hora_inicio']))?></b></h5>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <label for ="hora_inicio">Informações adicionais:</label>
+                                                                            <b><h5 style="background-color:#ececec"><?php echo $result['informacoes_adicionais']?></b></h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         
                                         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
                                         <script>
@@ -259,7 +373,7 @@ include 'navbar.php';
                                             });
                                         </script>
                                     <?php
-                                        $hora = date('Y-m-d H:i:s', strtotime('+30 minute', strtotime($hora)));
+                                        $hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
                                     }
                                     ?>
                                 </tbody>
