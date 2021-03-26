@@ -133,6 +133,7 @@ tr{
 }
 
 #iconeexcluiragendamento{
+  text-align: center;;
   float: right;
   padding-left: 4px;
   width: 20px;
@@ -143,11 +144,13 @@ tr{
   border-bottom-right-radius: 0px;
   border-top-left-radius:20px;
   border-bottom-left-radius:20px;
-  background-color: lightgrey!important;
-  border: lightgrey;
+  background-color: white!important;
+  border-color: lightgrey!important;
+  color: lightgrey;
 }
 #iconeexcluiragendamento:hover{
   background-color:#e97777!important;
+  color: white;
 }
 
 #iconedetalhesagendamento{
@@ -161,11 +164,13 @@ tr{
   border-bottom-left-radius: 0px;
   border-top-right-radius:20px;
   border-bottom-right-radius:20px;
-  background-color: lightgrey!important;
-  border: lightgrey;
+  background-color: white!important;
+  border-color: lightgrey!important;
+  color:lightgrey;
 }
 #iconedetalhesagendamento:hover{
   background-color:#6cc5d4!important;
+  color: white;
 }
 
 .dados{

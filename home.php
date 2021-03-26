@@ -67,7 +67,7 @@ include 'navbar.php';
                             
                             ?>
                             <thead>
-                                <tr>
+                                <tr><h5  style="text-align: center;" ><b> Agenda do Dia</b></h5>
                                     <th>Horário</th>
                                     <th>Profissional</th>
                                     <th>Procedimento</th>
@@ -110,7 +110,6 @@ include 'navbar.php';
                     <div class="lista overflow-auto">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="10">
-
                                 <thead>
                                     <tr>
                                         <th>Horário</th>
@@ -129,7 +128,7 @@ include 'navbar.php';
                                     <?php
                                     for ($j = 0; $j < 30; $j++) {
 
-                                        $select = "SELECT a.*,b.procedimento, c.nome, c.sobrenome, f.funcionario from agenda a
+                                        $select = "SELECT a.*,b.procedimento, c.nome, c.sobrenome, f.funcionario,c.email,c.cpf,f.sobrenome_funcionario,c.celular from agenda a
                                                     Inner join procedimento b on a.id_procedimento = b.id
                                                     inner join cliente c on a.id_cliente = c.id
                                                     inner join funcionario f on f.id = a.id_funcionario
@@ -198,7 +197,7 @@ include 'navbar.php';
 
                                                             });
                                                         } else {
-                                                            swal("Exclusão cancelada!");
+                                                            
                                                         }
                                                     });
 
@@ -345,6 +344,7 @@ include 'navbar.php';
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             </div>
                                                         </div>
                                                     </div>
