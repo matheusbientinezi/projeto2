@@ -1,5 +1,6 @@
 <?php
 include 'navbar.php';
+
 ?>
 <body id="page-top">
 
@@ -190,11 +191,12 @@ include 'navbar.php';
                                                             }).done(function() {
                                                                 el.fadeOut(function() {
                                                                     el.remove();
-                                                                })
-                                                            });
-                                                            swal("Agendamento cancelado com sucesso!", {
-                                                                icon: "success",
 
+                                                                swal("Agendamento cancelado com sucesso!", {
+                                                                icon: "success",
+                                                                });
+                                                                window.location.reload();
+                                                                })
                                                             });
                                                         } else {
                                                             
@@ -215,18 +217,18 @@ include 'navbar.php';
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <form method="post" id="formmodal" action="insertagendamento.php">
+                                                        <form id="form<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" name="formmmodal" method="post"  action="insertagendamento.php">
                                                             <div class="row" id="rowmodal">
                                                                 <div class="col-md-12">
                                                                     <label for="funcionario">Profissional
-                                                                    <h5><input id="funcionario" type="text" name="funcionario"  value = "<?php echo $resultfuncionario[$i]['funcionario'];echo ' '; echo $resultfuncionario[$i]['sobrenome_funcionario']; ?>" disabled></h5></input>
+                                                                    <h5><input id="funcionario<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="text" name="funcionario"  value = "<?php echo $resultfuncionario[$i]['funcionario'];echo ' '; echo $resultfuncionario[$i]['sobrenome_funcionario']; ?>" disabled></h5></input>
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                             <div class="row" id="rowmodal">
                                                                 <div class="col-md-12">
                                                                     <label for="data">Data
-                                                                    <h5><input type="text" name="dia" id="data" value="<?php echo date('d/m/Y',strtotime($dia));echo ' '; echo date('H:i',strtotime($hora)); ?>" disabled></h5></input>
+                                                                    <h5><input id="data<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="text" name="dia" value="<?php echo date('d/m/Y',strtotime($dia));echo ' '; echo date('H:i',strtotime($hora)); ?>" disabled></h5></input>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -239,11 +241,11 @@ include 'navbar.php';
                                                                     $proced->execute();
                                                                     $resultproced = $proced->fetchAll(PDO::FETCH_ASSOC);
                                                                     ?>
-                                                                    <select id="procedimento" class="form-control form-control-sm" style="width:250px;">
+                                                                    <select id="procedimento<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" class="form-control form-control-sm" style="width:250px;">
                                                                         <option selected></option>
                                                                         <?php
                                                                         foreach ($resultproced as $dadosproced) {
-                                                                            echo '<option name = "procedimento" id="' . $dadosproced['id'] . '" value="' . $dadosproced['id'] . '">' . $dadosproced['procedimento'] . '</option>';
+                                                                            echo '<option name = "procedimento" value="' . $dadosproced['id'] . '">' . $dadosproced['procedimento'] . '</option>';
                                                                         } ?>
                                                                     </select>
                                                                     </label>
@@ -258,12 +260,12 @@ include 'navbar.php';
                                                                     $cliente->execute();
                                                                     $resultcliente = $cliente->fetchAll(PDO::FETCH_ASSOC);
                                                                     ?>
-                                                                    <select id = "cliente" class="form-control form-control-sm"  style="width:250px;">
+                                                                    <select id = "cliente<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" class="form-control form-control-sm"  style="width:250px;">
                                                                         <option selected></option>
                                                                         <?php
                                                                         foreach ($resultcliente as $dadoscliente) {
                                                                             print_r($dadoscliente);
-                                                                            echo '<option name="cliente" id="' . $dadoscliente['id'] . '" value="' . $dadoscliente['id'] . '">' . $dadoscliente['nome'] . ' ' . $dadoscliente['sobrenome'] . '</option>';
+                                                                            echo '<option name="cliente" value="' . $dadoscliente['id'] . '">' . $dadoscliente['nome'] . ' ' . $dadoscliente['sobrenome'] . '</option>';
                                                                         } ?>
                                                                     </select>
                                                                     </label>
@@ -271,8 +273,8 @@ include 'navbar.php';
                                                             </div>
                                                             <div class="rowmodal">
                                                                 <div class="col-md-12">
-                                                                    <label for="informacoesadicionais">Informações Adicionais
-                                                                        <textarea name="iformacoesadicionais" id="informacoesadicionais"  style="width:250px;">
+                                                                    <label for="informacoesadicionais<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>">Informações Adicionais
+                                                                        <textarea id="informacoesadicionais"  name="iformacoesadicionais" style="width:250px;">
                                                                         </textarea>
                                                                     </label>
                                                                 </div>
@@ -351,26 +353,32 @@ include 'navbar.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                                    
                                         <script>
-                                            $('#agendar<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>').click(function agendar() {
-
-                                                var form = new FormData($("#formmodal"));
-
+                                            $("#agendar<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>").on("click", function (e) {
+                                                e.preventDefault();
+                                                var id = "exampleModal<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>"
+                                                console.log('ID: ' + id);
+                                                
                                                 $.ajax({
-                                                    url: 'insertagendamento.php',
-                                                    type: 'POST',
-                                                    processData: false,
-                                                    contentType: false,
-                                                    data: form,
-                                                    
-                                                    success: function(resultado) {
-                                                        alert("inserido com sucesso!");
-                                                    },
+                                                type: "POST",
+                                                url: "insertagendamento.php",
+                                                data:{
+                                                    funcionario:    $('#funcionario'+id).val(),
+                                                    data:   $('#data'+id).val() ,
+                                                    procedimento:$('#procedimento'+id).val() ,
+                                                    cliente: $('#cliente'+id).val(),
+                                                    informacoesadicionais:$('#informacoesadicionais'+id).val() 
+                                                },
+                                                dataType: "json",
+                                                processData: false,
+                                                contentType: false,
+                                                success: function (response) {
+                                                     alert("agendamento realizado");
+                                                },
                                                 });
-                                                window.location.href="insertagendamento.php";
-                                            });
+                                                // window.location.href="insertagendamento.php";
+                                                });
                                         </script>
                                     <?php
                                         $hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
@@ -394,6 +402,8 @@ include 'navbar.php';
 
 
     <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/script.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/script.js"></script>
