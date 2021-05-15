@@ -87,7 +87,7 @@ include 'connect.php';
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle disabled"  style="color:darkgray;" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class = "testeicone"><i class="fas fa-users"></i></div>
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Funcionários</span>               
                 </a>
@@ -105,24 +105,14 @@ include 'connect.php';
             </li>
 
             <div class="topbar-divider d-none d-sm-block"></div>
-
+            
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="cadastrarprocedimento.php"  aria-expanded="false">
                 <div class = "testeicone"><i class="fas fa-paint-brush"></i></div>
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Procedimentos</span>               
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Procedimento</span>               
                 </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="cadastrarprocedimento.php">
-                    <i class="fas fa-paint-brush fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Cadastrar
-                    </a>
-                    <a class="dropdown-item" href="listarprocedimentos.php">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Listar
-                    </a>
-                </div>
             </li>
+
 
             <div class="topbar-divider d-none d-sm-block"></div>
 

@@ -69,6 +69,10 @@ const renderCalendar = () => {
   }
 };
 
+document.querySelector(".days").addEventListener("click", () =>{
+    days += `<div class="today">${i}</div>`;
+});
+
 document.querySelector(".prev").addEventListener("click", () => {
   date.setMonth(date.getMonth() - 1);
   renderCalendar();

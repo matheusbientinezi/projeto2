@@ -152,6 +152,12 @@ tr{
   background-color:#e97777!important;
   color: white;
 }
+#iconedetalhesagendamento:focus{
+
+  box-shadow: 0 0 0 0.2rem #6cc5d4!important;
+
+}
+
 
 #iconedetalhesagendamento{
   float: left;

@@ -128,7 +128,7 @@
                                 <div class="form-group col-md-4">
                                     <label for="inputState" name="uf">UF</label>
                                     <select type="text" id="uf" name="uf" class="form-control">
-                                        <option selected>Choose...</option>
+                                        <option selected></option>
                                         <option>PR</option>
                                     </select>
                                 </div>

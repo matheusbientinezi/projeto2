@@ -3,56 +3,12 @@ include 'navbar.php';
 
     /** VALIDA SE TEM UPDATE E FAZ O UPDATE*/
     if(isset($_GET['id_editar_cliente'])){
+        $id = $_GET['id_editar_cliente'];
         $sql = $pdo->prepare("SELECT * FROM cliente WHERE id =?");
         $sql->execute(array($_GET['id_editar_cliente']));
         $result = $sql->fetch(PDO::FETCH_ASSOC);
         
         }
-
-    if(isset($_POST['salvardados'])){
-
-        $nome=$_POST['nome'];
-        $sobrenome=$_POST['sobrenome'];
-        $email=$_POST['email'];
-        $cpf=$_POST['cpf'];
-        $celular=$_POST['celular'];
-        $telefone=$_POST['telefone'];
-        $datanascimento=$_POST['datanascimento'];
-        $endereco=$_POST['endereco'];
-        $numero=$_POST['numero'];
-        $cidade=$_POST['cidade'];
-        $uf=$_POST['uf'];
-        $cep=$_POST['cep'];
-        $informacoesadicionais=$_POST['informacoesadicionais'];
-
-
-        $sqlupdatenome = "UPDATE cliente 
-                          SET nome='".$_POST['nome']."',
-                              sobrenome ='".$_POST['sobrenome']."',
-                              email='".$_POST['email']."',
-                              cpf='".$_POST['cpf']."',
-                              celular='".$_POST['celular']."',
-                              telefone='".$_POST['telefone']."',
-                              datanascimento='".$_POST['datanascimento']."',
-                              endereco='".$_POST['endereco']."',
-                              numero='".$_POST['numero']."',
-                              cidade='".$_POST['cidade']."',
-                              uf='".$_POST['uf']."',
-                              cep='".$_POST['cep']."',
-                              informacoesadicionais='".$_POST['informacoesadicionais']."'
-                          WHERE id = ".$result['id']."";
-        $updatenome=$pdo->prepare($sqlupdatenome);
-        $updatenome->execute();
-
-    echo '<script type="text/javascript">
-            alert("vacilao morre cedo");
-         </script>';
-
-    
-
-}
-
-
 
 ?>
 <!DOCTYPE html>
@@ -93,6 +49,7 @@ include 'navbar.php';
                         <form method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
+                                <input type="hidden" id="id" value=<?php echo $id;?>></input>
                                     <label for="inputEmail4">Nome</label>
                                     <input type="text" value="<?php echo $result['nome'];?>" name="nome" class="form-control" id="nome" required>
                                 </div>
@@ -171,20 +128,63 @@ include 'navbar.php';
                                 <label for="informacoesadicionais">Informacões Adicionais</label>
                                 <input type="text" value="<?php echo $result['informacoesadicionais'];?>" name="informacoesadicionais" class="form-control" id="informacoesadicionais" placeholder="Ex: Doenças, uso de medicamentos, alergias , etc.">
                             </div>
-                            <button type="submit" name="salvardados" id="salvardados" class="btn btn-primary">Salvar Dados</button>
+                            <button type="button" name="salvardadoscliente" id="salvardadoscliente" class="btn btn-primary">Salvar Dados</button>
                         </form>
                     </div>
                 </div>
+                
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+        <script>
+        $("button#salvardadoscliente").click(function atualizaCadastro() {
 
-                <!-- SEGUNDA DIV QUE PODE USAR-->
-                <!-- <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Brand Buttons</h6>
-                    </div>
-                    <div class="card-body">
-                    </div>
-                </div> -->
+        var id_cliente = $('#id').val();
+        var nome = $('#nome').val();
+        var sobrenome = $('#sobrenome').val();
+        var email = $('#email').val();
+        var cpf = $('#cpf').val();
+        var celular = $('#celular').val();
+        var telefone = $('#telefone').val();
+        var datanascimento = $('#datanascimento').val();
+        var endereco = $('#endereco').val();
+        var numero = $('#numero').val();
+        var cidade = $('#cidade').val();
+        var uf = $('#uf').val();
+        var cep = $('#cep').val();
+        var informacoesadicionais = $('#informacoesadicionais').val();
+
+
+
+        $.ajax({
+        method: 'post',
+            data:{
+                id_cliente,
+                nome,
+                sobrenome,
+                email,
+                cpf,
+                celular,
+                telefone,
+                datanascimento,
+                endereco,
+                numero,
+                cidade,
+                uf,
+                cep,
+                informacoesadicionais
+
+            },
+        url: 'update.php'
+
+            }).done(function (){
+            swal({title: "Cadastro atualizado com sucesso!", 
+                icon: "success"})
+                .then(function(){ 
+                location.reload();
+            }
+            );  
+            });
+        });
+        </script>
 <!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
             
             <!-- FECHA DIVS ANTERIORES -->
