@@ -29,13 +29,18 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   `tempo` time DEFAULT NULL,
   `status` enum('realizado','cancelado','reagendado','agendado') DEFAULT NULL,
   `informacoes_adicionais` varchar(300) DEFAULT NULL,
+  `quantidade_horarios` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela studio.agenda: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela studio.agenda: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `agenda` DISABLE KEYS */;
-INSERT INTO `agenda` (`id`, `id_funcionario`, `id_cliente`, `id_procedimento`, `data_agendamento`, `hora_inicio`, `hora_final`, `tempo`, `status`, `informacoes_adicionais`) VALUES
-	(69, 1, 46, 1, '2021-04-06 18:04:12', '2021-04-06 07:30:00', '2021-04-06 08:30:00', '01:00:00', 'agendado', 'teste                                           ');
+INSERT INTO `agenda` (`id`, `id_funcionario`, `id_cliente`, `id_procedimento`, `data_agendamento`, `hora_inicio`, `hora_final`, `tempo`, `status`, `informacoes_adicionais`, `quantidade_horarios`) VALUES
+	(87, 1, 46, 1, '2021-04-18 19:31:47', '2021-06-04 07:30:00', '2021-06-04 08:30:00', '01:00:00', 'agendado', '                                                                                    ', 1),
+	(88, 1, 46, 1, '2021-04-18 19:32:10', '2021-04-06 07:30:00', '2021-04-06 08:30:00', '01:00:00', 'cancelado', 'teste                                                                  ', 1),
+	(89, 1, 50, 1, '2021-04-18 19:52:18', '2021-04-06 07:30:00', '2021-04-06 08:30:00', '01:00:00', 'cancelado', 'teste                                                              ', 1),
+	(90, 1, 46, 1, '2021-04-18 19:53:00', '2021-04-06 07:30:00', '2021-04-06 08:30:00', '01:00:00', 'agendado', 'tete                                                             ', 1),
+	(91, 2, 46, 16, '2021-05-02 17:41:24', '2021-04-06 07:30:00', '2021-04-06 10:30:00', '03:00:00', 'agendado', '                                                                                    ', 5);
 /*!40000 ALTER TABLE `agenda` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela studio.cliente
@@ -57,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `data_cadastro` timestamp NULL DEFAULT current_timestamp(),
   `status` enum('A','I') DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4;
 
 -- Copiando dados para a tabela studio.cliente: ~5 rows (aproximadamente)
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
@@ -67,7 +72,8 @@ INSERT INTO `cliente` (`id`, `nome`, `sobrenome`, `email`, `cpf`, `celular`, `te
 	(50, 'Matheus', 'Bientinezi', 'matheusbientinezi.mb@gmail.com', '101.117.399-93', '(41) 9 9161-5069', '(41) 9916-1506', '1998-12-29', 'Rua Francisco Kochinski', '', 'Curitiba', '', '81920-530', 'teste', '2021-02-07 16:02:43', 'A'),
 	(51, 'Luis', 'Carneiro', 'luis_carneiro@webcontrol.com.br', '', '', '', '0000-00-00', '', '', '', 'Choose...', '', '', '2021-02-08 13:26:50', 'I'),
 	(52, 'Lucas', 'Lopes', 'lucasbientinezi@gmail.com', '101.117.399-93', '(41) 9 9161-5069', '', '1996-11-14', 'Rua Francisco Kochinski', '512', 'Curitiba', 'PR', '81010-220', 'Teste', '2021-02-16 16:11:02', 'I'),
-	(53, 'Deise ', 'Jardim', 'deise.tecman@gmail.com', '901.431.670-49', '(41) 9 9730-9958', '(41) 9916-1506', '1974-05-25', 'rua francisco kochinski', '512', 'Curitiba', 'PR', '81920-530', '', '2021-03-06 10:57:06', 'A');
+	(53, 'Deise ', 'Jardim', 'deise.tecman@gmail.com', '901.431.670-49', '(41) 9 9730-9958', '(41) 9916-1506', '1974-05-25', 'rua francisco kochinski', '512', 'Curitiba', 'PR', '81920-530', '', '2021-03-06 10:57:06', 'A'),
+	(54, 'Matheus Lopes', 'Bientinezi', 'matheusbientinezi.mb@gmail.com', '101.117.399-93', '(41) 9 9161-5069', '(41) 9916-1506', '0000-00-00', '', '', '', '', '', '', '2021-05-02 17:27:29', 'A');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela studio.funcionario
@@ -113,16 +119,17 @@ CREATE TABLE IF NOT EXISTS `procedimento` (
   `status` enum('A','I') DEFAULT 'A',
   `color` varchar(50) DEFAULT 'nada',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela studio.procedimento: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela studio.procedimento: ~6 rows (aproximadamente)
 /*!40000 ALTER TABLE `procedimento` DISABLE KEYS */;
 INSERT INTO `procedimento` (`id`, `procedimento`, `tempo`, `informacoesadicionais`, `status`, `color`) VALUES
-	(1, 'Micropigmentação labial teste', '02:00:00', 'teste', 'A', '#FFD700'),
-	(2, 'Micropigmentação labial', '02:00:00', '', 'A', '#0071c5'),
+	(1, 'Micropigmentação labial', '01:30:00', 'teste2', 'A', '#FFD700'),
 	(5, 'Desing de sobrancelha + henna', '00:45:00', '', 'A', '#40e0d0'),
 	(6, 'Brow lamination', '01:00:00', '', 'A', ''),
-	(8, 'Depilação egípcia', '01:00:00', '', 'A', '#ffea00');
+	(8, 'Depilação egípcia', '01:00:00', '', 'A', '#ffea00'),
+	(16, 'Depilação egípcia teste', '03:00:00', '', 'I', 'sem cor'),
+	(17, 'Depilação egípcia teste', '03:00:00', '', 'A', 'sem cor');
 /*!40000 ALTER TABLE `procedimento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela studio.usuario_adm
