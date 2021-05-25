@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/Sao_Paulo');
 include 'connect.php';
 
     if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {

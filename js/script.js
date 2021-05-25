@@ -61,6 +61,7 @@ const renderCalendar = () => {
     } else {
       days += `<div>${i}</div>`;
     }
+
   }
 
   for (let j = 1; j <= nextDays; j++) {
@@ -68,6 +69,18 @@ const renderCalendar = () => {
     monthDays.innerHTML = days;
   }
 };
+
+var datateste = (date.getFullYear() + "-" + ((date.getMonth() + 1)) + "-" + (date.getDate() )) ;
+var datateste = '2021-06-20';
+
+  $.ajax({
+    method: 'get',
+    data:{
+      datateste
+    },
+    url: 'home.php'
+
+  });
 
 document.querySelector(".days").addEventListener("click", () =>{
     days += `<div class="today">${i}</div>`;
@@ -82,6 +95,7 @@ document.querySelector(".next").addEventListener("click", () => {
   date.setMonth(date.getMonth() + 1);
   renderCalendar();
 });
+
 
 renderCalendar();
 

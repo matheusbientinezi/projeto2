@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Sao_Paulo');
 include 'navbar.php';
 
 ?>
@@ -35,9 +36,10 @@ include 'navbar.php';
                         <div>Sex</div>
                         <div>Sáb</div>
                     </div>
-                    <div class="days"></div>
+                    <div id = "days" class="days"></div>
                 </div>
             </div>
+
             <div class="col-md-8">
                 <div class="lista overflow-auto">
                     <div class="table-responsive">
@@ -46,6 +48,12 @@ include 'navbar.php';
                             $dataatual = new DateTime();
                             $hora1 = '00:00:00';
                             $hora2='23:59:59';
+
+                            if(isset($_POST['datateste'])){
+                                $dateste = $_POST['datateste'];
+                            
+                            }
+
                             $dataatual = $dataatual->format('Y-m-d');
                             $selectfuncionarios = "SELECT id,funcionario, sobrenome_funcionario from funcionario";
                 
@@ -63,6 +71,7 @@ include 'navbar.php';
                                         $selectagendadia = $pdo->prepare($selectdia);
                                         $selectagendadia->execute();
                                         $resultdia = $selectagendadia->fetchAll(PDO::FETCH_ASSOC);
+                                
                             ?>
                             <thead>
                                 <tr><h5  style="text-align: center;" ><b> Agenda do Dia</b></h5>
@@ -83,7 +92,7 @@ include 'navbar.php';
                                         <?php echo $agendadia['funcionario']; echo ' '; echo $agendadia['sobrenome_funcionario'];?>
                                     </td>
                                     <td>
-                                        <?php echo $agendadia['procedimento'] ;?>
+                                        <?php echo $agendadia['procedimento'] ; echo $datateste;?>
                                     </td>
                                     <td>
                                         <?php echo $agendadia['nome']; echo ' '; echo $agendadia['sobrenome'];?>
@@ -101,6 +110,7 @@ include 'navbar.php';
         <div class="row" id="row">
 
             <?php for ($i = 0; $i <= $contador - 1; $i++) {
+            
             $hora = '07:30:00';
             $dia = '2021-04-06';
             ?>
@@ -131,7 +141,8 @@ include 'navbar.php';
                                                     inner join cliente c on a.id_cliente = c.id
                                                     inner join funcionario f on f.id = a.id_funcionario
                                                     where a.status = 'agendado'
-                                                    AND a.id_funcionario =" . $resultfuncionario[$i]['id'] . " and a.hora_inicio = '" . $dia. " ".$hora."' ";
+                                                    AND a.id_funcionario =" . $resultfuncionario[$i]['id'] . " and a.hora_inicio = '" . $dataatual. " ".$hora."' ";
+                                        
                                         $selectagenda = $pdo->prepare($select);
                                         $selectagenda->execute();
                                         $result = $selectagenda->fetch(PDO::FETCH_ASSOC);
@@ -149,7 +160,9 @@ include 'navbar.php';
 
                                                     ?>
                                                     <div>
+                                                        <?php if($h+1 == 1){ ?>
                                                         <button id="iconedetalhesagendamento" data-toggle="modal" data-target="#detalhesagendamento<?php echo $result['id']?>" type="button" class="btn btn-danger"><i class="fas fa-list-ul"></i></button>
+                                                        <?php } ?>
                                                         <div class="dados">
                                                         <?php echo ($h+1).'.' ; ?>
                                                         <?php echo $result['nome']; ?>
@@ -158,7 +171,9 @@ include 'navbar.php';
                                                         <br>
                                                         <?php echo $result['procedimento']; ?>
                                                         </div>
+                                                        <?php if($h+1 == 1){ ?>
                                                         <button id="iconeexcluiragendamento" type="button" id_agendamento="<?php echo $result['id'] ?> " class="id_agendamento btn btn-danger"><i class="fas fa-times"></i></button>
+                                                        <?php } ?>
                                                     </div>  
 
                                                 <?php
@@ -206,91 +221,86 @@ include 'navbar.php';
                                                 } else { 
                                                     echo '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal' . $j . $resultfuncionario[$i]['funcionario'] . '"><i class="fas fa-calendar-plus"></i></button>';
                                                     ?>
-                                                    <!-- Modal 1 -->
-                                                    <div class="modal fade" id="exampleModal<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-sm" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Agendamento</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
 
-                                                                    <form id="form<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" name="formmmodal" method="post"  action="insertagendamento.php">
-                                                                        <div class="row" id="rowmodal">
-                                                                            <div class="col-md-12">
-                                                                                <label for="funcionario">Profissional
-                                                                                <h5><input id="funcionario<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="text" name="funcionario"  value = "<?php echo $resultfuncionario[$i]['funcionario'];echo ' '; echo $resultfuncionario[$i]['sobrenome_funcionario']; ?>" disabled></h5></input>
-                                                                                    <input id="id<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="hidden" value="<?php echo $resultfuncionario[$i]['id'] ?>"></input>
-                                                                                </label>
-                                                                            </div>
+                                                    <!-- Modal 1 -->
+                                                    <div class="modal fade bd-example-modal-sm" id="exampleModal<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h2>Teste</h2>
+                                                            </div>
+                                                            <div>
+                                                                <form id="form<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" name="formmmodal" method="post"  action="insertagendamento.php">
+                                                                    <div class="row" id="rowmodal">
+                                                                        <div class="col-md-12">
+                                                                            <label for="funcionario">Profissional
+                                                                            <h5><input id="funcionario<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="text" name="funcionario"  value = "<?php echo $resultfuncionario[$i]['funcionario'];echo ' '; echo $resultfuncionario[$i]['sobrenome_funcionario']; ?>" disabled></h5></input>
+                                                                                <input id="id<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="hidden" value="<?php echo $resultfuncionario[$i]['id'] ?>"></input>
+                                                                            </label>
                                                                         </div>
-                                                                        <div class="row" id="rowmodal">
-                                                                            <div class="col-md-12">
-                                                                                <label for="data">Data
-                                                                                <h5><input id="data<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="text" name="dia" value="<?php echo date('d/m/Y',strtotime($dia));echo ' '; echo date('H:i',strtotime($hora)); ?>" disabled></h5></input>
-                                                                                </label>
-                                                                            </div>
+                                                                    </div>
+                                                                    <div class="row" id="rowmodal">
+                                                                        <div class="col-md-12">
+                                                                            <label for="data">Data
+                                                                            <h5><input id="data<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="text" name="dia" value="<?php echo date('Y-m-d',strtotime($dataatual));echo ' '; echo date('H:i:s',strtotime($hora)); ?>" disabled></h5></input>
+                                                                            </label>
                                                                         </div>
-                                                                        <div class="row" id="rowmodal">
-                                                                            <div class="col-md-12">
-                                                                                <label for="procedimento">Procedimento
+                                                                    </div>
+                                                                    <div class="row" id="rowmodal">
+                                                                        <div class="col-md-12">
+                                                                            <label for="procedimento">Procedimento
+                                                                            <?php
+                                                                            $listaprocedimento = "SELECT * FROM procedimento";
+                                                                            $proced = $pdo->prepare($listaprocedimento);
+                                                                            $proced->execute();
+                                                                            $resultproced = $proced->fetchAll(PDO::FETCH_ASSOC);
+                                                                            ?>
+                                                                            <select id="procedimento<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" class="form-control form-control-sm" style="width:250px;" required>
+                                                                                <option selected></option>
                                                                                 <?php
-                                                                                $listaprocedimento = "SELECT * FROM procedimento";
-                                                                                $proced = $pdo->prepare($listaprocedimento);
-                                                                                $proced->execute();
-                                                                                $resultproced = $proced->fetchAll(PDO::FETCH_ASSOC);
-                                                                                ?>
-                                                                                <select id="procedimento<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" class="form-control form-control-sm" style="width:250px;" required>
-                                                                                    <option selected></option>
-                                                                                    <?php
-                                                                                    foreach ($resultproced as $dadosproced) {
-                                                                                        echo '<option name = "procedimento" value="' . $dadosproced['id'] . '">' . $dadosproced['procedimento'] . '</option>';
-                                                                                    } ?>
-                                                                                </select>
-                                                                                </label>
-                                                                                <input id="tempo<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="hidden" value="<?php echo $dadosproced['tempo'] ?>"></input>
-                                                                            </div>
+                                                                                foreach ($resultproced as $dadosproced) {
+                                                                                    echo '<option name = "procedimento" value="' . $dadosproced['id'] . '">' . $dadosproced['procedimento'] . '</option>';
+                                                                                } ?>
+                                                                            </select>
+                                                                            </label>
+                                                                            <input id="tempo<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" type="hidden" value=""></input>
                                                                         </div>
-                                                                        <div class="row" id="rowmodal">
-                                                                            <div class="col-md-12">
-                                                                                <label for="cliente">Selecione o Cliente
+                                                                    </div>
+                                                                    <div class="row" id="rowmodal">
+                                                                        <div class="col-md-12">
+                                                                            <label for="cliente">Selecione o Cliente
+                                                                            <?php
+                                                                            $selectcliente = "SELECT id, nome, sobrenome FROM cliente where status = 'A'";
+                                                                            $cliente = $pdo->prepare($selectcliente);
+                                                                            $cliente->execute();
+                                                                            $resultcliente = $cliente->fetchAll(PDO::FETCH_ASSOC);
+                                                                            ?>
+                                                                            <select id = "cliente<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" class="form-control form-control-sm"  style="width:250px;" required>
+                                                                                <option selected></option>
                                                                                 <?php
-                                                                                $selectcliente = "SELECT id, nome, sobrenome FROM cliente where status = 'A'";
-                                                                                $cliente = $pdo->prepare($selectcliente);
-                                                                                $cliente->execute();
-                                                                                $resultcliente = $cliente->fetchAll(PDO::FETCH_ASSOC);
-                                                                                ?>
-                                                                                <select id = "cliente<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>" class="form-control form-control-sm"  style="width:250px;" required>
-                                                                                    <option selected></option>
-                                                                                    <?php
-                                                                                    foreach ($resultcliente as $dadoscliente) {
-                                                                                        print_r($dadoscliente);
-                                                                                        echo '<option name="cliente" value="' . $dadoscliente['id'] . '">' . $dadoscliente['nome'] . ' ' . $dadoscliente['sobrenome'] . '</option>';
-                                                                                    } ?>
-                                                                                </select>
-                                                                                </label>
-                                                                            </div>
+                                                                                foreach ($resultcliente as $dadoscliente) {
+                                                                                    print_r($dadoscliente);
+                                                                                    echo '<option name="cliente" value="' . $dadoscliente['id'] . '">' . $dadoscliente['nome'] . ' ' . $dadoscliente['sobrenome'] . '</option>';
+                                                                                } ?>
+                                                                            </select>
+                                                                            </label>
                                                                         </div>
-                                                                        <div class="rowmodal">
-                                                                            <div class="col-md-12">
-                                                                                <label for="informacoesadicionais">Informações Adicionais
-                                                                                    <textarea id="informacoesadicionais<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>"  name="iformacoesadicionais" style="width:250px;">
-                                                                                    </textarea>
-                                                                                </label>
-                                                                            </div>
+                                                                    </div>
+                                                                    <div class="rowmodal">
+                                                                        <div class="col-md-12">
+                                                                            <label for="informacoesadicionais">Informações Adicionais</label><br>
+                                                                                <textarea id="informacoesadicionais<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>"  name="iformacoesadicionais" style="width:250px;">
+                                                                                </textarea>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                                                            <button type="button" id="agendar<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>"  data-dismiss="modal" class="agendar btn btn-primary">Agendar</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                                        <button type="button" id="agendar<?php echo $j . $resultfuncionario[$i]['funcionario'] ?>"  data-dismiss="modal" class="agendar btn btn-primary">Agendar</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
-                                                    </div>
+
                                                     <?php
                                                     $hora = date('H:i:s', strtotime('+30 minute', strtotime($hora)));
                                                 }
@@ -346,7 +356,7 @@ include 'navbar.php';
                                                                             <b><h5 style = "background-color:#b4fdf3"><?php echo $result['procedimento']?></b></h5>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <label for = "data_agendamento">Tempo médio procedimento:</label>
+                                                                            <label for = "data_agendamento">Tempo máximo de procedimento:</label>
                                                                             <b><h5 style="background-color:#ececec"><?php echo date('H\hi', strtotime($result['tempo']))?></b></h5>
                                                                         </div>
                                                                         <div class="col-md-6">
@@ -380,6 +390,8 @@ include 'navbar.php';
                                                 console.log(id_procedimento);
                                                 console.log(id_funcionario);
                                                 console.log(id_cliente);
+                                                console.log(data);
+                                                console.log(tempo);
                                                 
                                                 $.ajax({
                                                 method: 'post',
